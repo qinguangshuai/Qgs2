@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<item
+    android:state_checked="false"
+    android:drawable="@drawable/common_tab_btn_circle_n_hdpi"/>
+    <item
+        android:drawable="@drawable/common_tab_btn_circle_s_hdpi"
+        />
+</selector>

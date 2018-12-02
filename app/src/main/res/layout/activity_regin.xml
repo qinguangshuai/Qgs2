@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login"
+    tools:context=".login.ReginActivity">
+    <EditText
+        android:id="@+id/zhanghao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="36dp"
+        android:drawableLeft="@drawable/login_icon_phone_n_hdpi"
+        android:drawablePadding="20dp"
+        android:hint="手机号"
+        android:textColorHint="#fff" />
+    <RelativeLayout
+        android:id="@+id/re"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/zhanghao">
+        <EditText
+            android:id="@+id/mima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="36dp"
+            android:drawableLeft="@drawable/login_icon_lock_n_hdpi"
+            android:drawablePadding="20dp"
+            android:hint="登录密码"
+            android:inputType="textPassword"
+            android:drawableRight="@drawable/login_icon_eye_n_hdhpi"
+            android:textColorHint="#fff" />
+        <ImageView
+            android:id="@+id/hidden"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/login_icon_eye_n_hdhpi"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/deng"
+        android:textColor="#ffffff"
+        android:layout_below="@id/re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="36dp"
+        android:layout_alignParentRight="true"
+        android:text="已有账户!立即登录"/>
+    <Button
+        android:id="@+id/regin"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="120dp"
+        android:text="注册"
+        android:background="@drawable/roundedcorner"
+        android:textColor="#fe5a51"/>
+
+</RelativeLayout>
