@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
     private String pwd;
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
-    private Boolean showPassword = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +101,12 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
                 String name = annotation.userName();
                 String pwd1 = annotation.passWord();
                 if(name.equals(phone)){
-                    Toast.makeText(getApplicationContext(),"姓名没毛病",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"姓名没毛病",Toast.LENGTH_SHORT).show();
                     if(pwd1.equals(pwd)){
-                        Toast.makeText(getApplicationContext(),"密码没毛病",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"密码没毛病",Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(),"哪里出了错呢",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"哪里出了错呢",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

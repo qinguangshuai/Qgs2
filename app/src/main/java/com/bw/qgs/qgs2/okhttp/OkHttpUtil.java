@@ -24,6 +24,7 @@ public class OkHttpUtil {
     public static Gson gson = new Gson();
     public static final String MEDIO_TYPE = "application/json; charset=utf-8";
     public static final String MEDIO_POST = "POST";
+    public static final String MEDIO_GET = "GET";
     private static OkHttpClient client;
 
     //单例模式
@@ -51,12 +52,21 @@ public class OkHttpUtil {
             case MEDIO_POST:
                 request = builder.post(requestBody).build();
                 break;
+            case MEDIO_GET:
+                request = builder.build();
+                break;
         }
         return request;
     }
 
     public static void executePost(String url, BaseRequest baseRequest, Callback callback) {
         Request request = creat(url, MEDIO_POST, baseRequest);
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public static void executeGet(String url,Callback callback){
+        Request request = creat(url, MEDIO_GET,null);
         Call call = client.newCall(request);
         call.enqueue(callback);
     }

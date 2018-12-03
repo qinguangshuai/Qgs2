@@ -12,15 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"/>
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:background="@drawable/yuan"
-        android:layout_marginBottom="-30dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+           android:layout_centerHorizontal="true"
+            android:background="@drawable/yuan"
+            android:layout_marginBottom="25dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/fang"
+            android:layout_alignParentBottom="true"/>
         <RadioGroup
             android:id="@+id/rg"
-            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -62,4 +69,6 @@
                 android:drawableTop="@drawable/select4"
                 android:layout_weight="1"/>
         </RadioGroup>
+    </RelativeLayout>
+
 </LinearLayout>

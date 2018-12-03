@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.bw.qgs.qgs2.okhttp.OkHttpUtil;
 import com.bw.qgs.qgs2.url.LogUtil;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.HashMap;
 
@@ -18,6 +19,7 @@ public class App extends Application {
         super.onCreate();
         LogUtil.init();
         initHttpHeader();
+        Fresco.initialize(this);
     }
 
     private void initHttpHeader() {

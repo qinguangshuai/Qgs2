@@ -10,4 +10,5 @@ public interface UrlUtil {
     public String LOGIN2 = "&&pwd=";
     public String REGIN1 = "http://172.17.8.100/small/user/v1/register?phone=";
     public String REGIN2 = "&&pwd=";
+    public String ONE = "http://172.17.8.100/small/commodity/v1/commodityList";
 }
