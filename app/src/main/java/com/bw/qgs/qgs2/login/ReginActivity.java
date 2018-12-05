@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.login.bean.LoginUser;
 import com.bw.qgs.qgs2.login.presenter.ReginPresenter;
 import com.bw.qgs.qgs2.login.view.RegisnView;
 import com.bw.qgs.qgs2.url.BaseRequest;
@@ -62,7 +63,7 @@ public class ReginActivity extends AppCompatActivity implements RegisnView {
     }
 
     @Override
-    public void onSuccess(String result) {
+    public void onSuccess(String result, LoginUser loginUser) {
 
     }
 

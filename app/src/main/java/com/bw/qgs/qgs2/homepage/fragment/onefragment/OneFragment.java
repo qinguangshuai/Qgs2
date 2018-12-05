@@ -1,23 +1,28 @@
 package com.bw.qgs.qgs2.homepage.fragment.onefragment;
 
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.OneFragAdapter;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.ShoeAdapter;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.ShoeUser;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.TwoAdapterBean;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.OneFragmentOnePresenter;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.ShoePresenter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.view.OneFragmentOneView;
 import com.bw.qgs.qgs2.url.UrlUtil;
+import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import butterknife.BindView;
@@ -35,6 +40,9 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
     private XRecyclerView onefragmentrecycle;
     private OneFragmentOnePresenter mOneFragmentOnePresenter;
     private OneFragAdapter mOneFragAdapter;
+    private PopupWindow pop;
+    private ShoePresenter mShoePresenter;
+    private ShoeUser.ResultBean mResult1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,11 +86,11 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
     }
 
     private void initData() {
-
         mOneFragmentOnePresenter = new OneFragmentOnePresenter(this);
         mOneFragmentOnePresenter.one(UrlUtil.ONE);
-
         mOneFragAdapter = new OneFragAdapter(getActivity(), null);
+        mShoePresenter = new ShoePresenter(this);
+        mShoePresenter.shoe(UrlUtil.SHOE);
     }
 
     Handler mHandler = new Handler() {
@@ -100,12 +108,25 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
 
     @Override
     public void onSuccess(TwoAdapterBean.ResultBean resultBeans) {
-        //Toast.makeText(getActivity(),resultBeans+"",Toast.LENGTH_LONG).show();
         LinearLayoutManager lineatlayoutmanager = new LinearLayoutManager(getActivity());
         onefragmentrecycle.setLayoutManager(lineatlayoutmanager);
         mOneFragAdapter.setdata(resultBeans);
+        mOneFragAdapter.setHttpOnClick(new OneFragAdapter.HttpOnClick() {
+            @Override
+            public void click(View view, int position) {
+                Toast.makeText(getActivity(),"222",Toast.LENGTH_SHORT).show();
+            }
+        });
         onefragmentrecycle.setAdapter(mOneFragAdapter);
-        //Log.e("===",resultBeans+"");
+    }
+
+    @Override
+    public void onShopSuccess(String result) {
+        Gson gson = new Gson();
+        ShoeUser shoeUser = gson.fromJson(result, ShoeUser.class);
+        mResult1 = shoeUser.getResult();
+        ShoeAdapter shoeAdapter = new ShoeAdapter(getActivity(),mResult1);
+        //onefragmentrecycle1.setAdapter(shoeAdapter);
     }
 
     @Override
@@ -117,6 +138,9 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lefticon:
+                View popView = View.inflate(getActivity(), R.layout.pop_item, null);
+                pop = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                pop.showAsDropDown(view, 0, 0);
                 break;
             case R.id.righticon:
                 break;

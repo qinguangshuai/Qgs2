@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.BannerUser;
@@ -39,6 +40,11 @@ public class OneFragAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private TwoAdapterBean.ResultBean list;
+    private HttpOnClick mHttpOnClick;
+
+    public void setHttpOnClick(HttpOnClick httpOnClick) {
+        mHttpOnClick = httpOnClick;
+    }
 
     public OneFragAdapter(Context context, TwoAdapterBean.ResultBean list) {
         mContext = context;
@@ -54,7 +60,7 @@ public class OneFragAdapter extends RecyclerView.Adapter {
             return new OneViewHolder(view);
         } else if (i == TYPE_TWO) {
             view = LayoutInflater.from(mContext).inflate(R.layout.two, viewGroup, false);
-            return new TwoViewHolder(view);
+            return new TwoViewHolder(view,mHttpOnClick);
         } else if (i == TYPE_THREE) {
             view = LayoutInflater.from(mContext).inflate(R.layout.three, viewGroup, false);
             return new ThreeViewHolder(view);
@@ -88,6 +94,12 @@ public class OneFragAdapter extends RecyclerView.Adapter {
             TwoAdapterBean.ResultBean.RxxpBean rxxpBean = rxxp.get(0);
             List<TwoAdapterBean.ResultBean.RxxpBean.CommodityListBean> commodityList = rxxpBean.getCommodityList();
             TwoAdapter twoAdapter = new TwoAdapter(mContext, commodityList);
+            twoAdapter.setHttpOnClick(new TwoAdapter.HttpOnClick() {
+                @Override
+                public void click(View view, int position) {
+                    Toast.makeText(mContext,"111",Toast.LENGTH_SHORT).show();
+                }
+            });
             ((TwoViewHolder) viewHolder).tworecycle.setAdapter(twoAdapter);
         }
         if (viewHolder instanceof ThreeViewHolder) {
@@ -153,10 +165,16 @@ public class OneFragAdapter extends RecyclerView.Adapter {
         TextView text2;
         RecyclerView tworecycle;
 
-        public TwoViewHolder(@NonNull View itemView) {
+        public TwoViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick) {
             super(itemView);
             text2 = itemView.findViewById(R.id.twotextView);
             tworecycle = itemView.findViewById(R.id.tworecycle);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    httpOnClick.click(v,getAdapterPosition());
+                }
+            });
         }
     }
 
@@ -182,5 +200,8 @@ public class OneFragAdapter extends RecyclerView.Adapter {
             text4 = itemView.findViewById(R.id.fourtextView);
             recycle4 = itemView.findViewById(R.id.threerecycle);
         }
+    }
+    public interface HttpOnClick{
+        void click(View view,int position);
     }
 }

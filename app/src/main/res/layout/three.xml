@@ -8,14 +8,26 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp">
 
-    <TextView
-        android:id="@+id/threetextView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bitmap1"
-        android:text="魔力时尚" />
+        android:background="@drawable/bitmap1">
+        <TextView
+            android:id="@+id/threetextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="魔力时尚" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/home_btn_more_purple_n_hdpi"/>
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/threerecycle"
         android:layout_width="match_parent"

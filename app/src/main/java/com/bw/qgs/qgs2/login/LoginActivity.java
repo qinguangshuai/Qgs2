@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,6 +24,9 @@ import com.bw.qgs.qgs2.login.presenter.LoginPresenter;
 import com.bw.qgs.qgs2.login.view.RegisnView;
 import com.bw.qgs.qgs2.url.BaseRequest;
 import com.bw.qgs.qgs2.url.UrlUtil;
+import com.google.gson.Gson;
+
+import java.lang.annotation.Annotation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +55,8 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
     private String pwd;
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
+    private String mSessionId;
+    private int mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,30 +88,18 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
                 startActivity(new Intent(LoginActivity.this, ReginActivity.class));
                 break;
             case R.id.login:
-                if (remember.isChecked()) {
-                    SharedPreferences.Editor edit = sp.edit();
-                    edit.putString("phone", phone);
-                    edit.putString("pwd", pwd);
-                    edit.putBoolean("remember", remember.isChecked());
-                    edit.commit();
-                }else{
-                    edit.putString("phone", "");
-                    edit.putString("pwd", "");
-                    edit.putBoolean("remember", remember.isChecked());
-                    edit.commit();
-                }
                 mLoginPresenter.login(UrlUtil.LOGIN1, phone + UrlUtil.LOGIN2, pwd, new BaseRequest());
-                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 Class<LoginUser> loginUserClass = LoginUser.class;
                 CusTomComment annotation = loginUserClass.getAnnotation(CusTomComment.class);
                 String name = annotation.userName();
                 String pwd1 = annotation.passWord();
-                if(name.equals(phone)){
+                if (name.equals(phone)) {
                     //Toast.makeText(getApplicationContext(),"姓名没毛病",Toast.LENGTH_SHORT).show();
-                    if(pwd1.equals(pwd)){
+                    if (pwd1.equals(pwd)) {
                         //Toast.makeText(getApplicationContext(),"密码没毛病",Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
                     //Toast.makeText(getApplicationContext(),"哪里出了错呢",Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -113,8 +107,32 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
     }
 
     @Override
-    public void onSuccess(String result) {
-        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+    public void onSuccess(String result, LoginUser loginUser) {
+        mSessionId = loginUser.getResult().getSessionId();
+        mUserId = loginUser.getResult().getUserId();
+        String headPic = loginUser.getResult().getHeadPic();
+        String nickName = loginUser.getResult().getNickName();
+        if (remember.isChecked()) {
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putString("phone", phone);
+            edit.putString("pwd", pwd);
+            edit.putString("sessionId", mSessionId);
+            edit.putInt("userId", mUserId);
+            edit.putString("headPic",headPic);
+            edit.putString("nickName",nickName);
+            edit.putBoolean("remember", remember.isChecked());
+            edit.commit();
+        } else {
+            edit.putString("phone", "");
+            edit.putString("pwd", "");
+            edit.putString("sessionId", mSessionId);
+            edit.putInt("userId", mUserId);
+            edit.putString("headPic",headPic);
+            edit.putString("nickName",nickName);
+            edit.putBoolean("remember", remember.isChecked());
+            edit.commit();
+        }
+        Log.e("===",result);
     }
 
     @Override

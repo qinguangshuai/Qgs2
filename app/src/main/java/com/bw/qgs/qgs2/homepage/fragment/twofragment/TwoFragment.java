@@ -1,21 +1,54 @@
 package com.bw.qgs.qgs2.homepage.fragment.twofragment;
 
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.homepage.fragment.twofragment.bean.TwoFragmentUser;
+import com.bw.qgs.qgs2.homepage.fragment.twofragment.presenter.TwoFragmentPresenter;
+import com.bw.qgs.qgs2.homepage.fragment.twofragment.view.TwoFragmentView;
+import com.bw.qgs.qgs2.url.UrlUtil;
+import com.google.gson.Gson;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-public class TwoFragment extends Fragment {
+import java.util.List;
+
+public class TwoFragment extends Fragment implements TwoFragmentView {
+
+    private TwoFragmentPresenter mTwoFragmentPresenter;
+    private RecyclerView xrecycle;
+    private List<TwoFragmentUser.ResultBean> mResult1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_two, container, false);
+        View view = inflater.inflate(R.layout.fragment_two, container, false);
+        xrecycle = view.findViewById(R.id.twofragmentxrecycle);
+        mTwoFragmentPresenter = new TwoFragmentPresenter(this);
+        mTwoFragmentPresenter.cicle(UrlUtil.CICLE);
+        return view;
     }
 
+    @Override
+    public void onSuccess(String result) {
+        Gson gson = new Gson();
+        TwoFragmentUser twoFragmentUser = gson.fromJson(result, TwoFragmentUser.class);
+        mResult1 = twoFragmentUser.getResult();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        xrecycle.setLayoutManager(linearLayoutManager);
+        //Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFailer(String msg) {
+
+    }
 }

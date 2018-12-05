@@ -8,14 +8,27 @@
     android:background="#fff"
     android:layout_marginRight="20dp">
 
-    <TextView
-        android:id="@+id/fourtextView"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:background="@drawable/bitmap2"
-        android:text="品质生活" />
+        android:background="@drawable/bitmap2">
+        <TextView
+            android:id="@+id/fourtextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="品质生活" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/home_btn_moer_pink_n_hdpi"/>
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/threerecycle"
         android:layout_width="match_parent"

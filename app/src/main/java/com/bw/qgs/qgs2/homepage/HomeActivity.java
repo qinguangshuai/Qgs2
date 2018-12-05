@@ -1,8 +1,8 @@
 package com.bw.qgs.qgs2.homepage;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioGroup;
@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.fivefragment.FiveFragment;
 import com.bw.qgs.qgs2.homepage.fragment.fourfragment.FourFragment;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.BlankFragment;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.OneFragment;
 import com.bw.qgs.qgs2.homepage.fragment.threefragment.ThreeFragment;
 import com.bw.qgs.qgs2.homepage.fragment.twofragment.TwoFragment;
@@ -26,8 +27,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initView();
-        final ArrayList<Fragment> list = new ArrayList<Fragment>();
-        list.add(new OneFragment());
+        final ArrayList<Fragment> list = new ArrayList<>();
+        list.add(new BlankFragment());
         list.add(new TwoFragment());
         list.add(new ThreeFragment());
         list.add(new FourFragment());
@@ -71,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-        homepager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+        homepager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
                 return list.get(i);

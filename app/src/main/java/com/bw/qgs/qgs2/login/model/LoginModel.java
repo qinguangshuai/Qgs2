@@ -31,14 +31,13 @@ public class LoginModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String string = response.body().string();
-
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         Gson gson = new Gson();
                         LoginUser loginUser = gson.fromJson(string, LoginUser.class);
-                        String status = loginUser.getStatus();
-                        httpCallBack.getData(status);
+                        LoginUser.ResultBean result = loginUser.getResult();
+                        httpCallBack.getData(string,loginUser);
                     }
                 });
             }
@@ -53,6 +52,6 @@ public class LoginModel {
     };
 
     public interface HttpCallBack {
-        void getData(String s);
+        void getData(String s,LoginUser loginUser);
     }
 }

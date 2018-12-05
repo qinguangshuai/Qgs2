@@ -11,5 +11,6 @@ import java.util.List;
  */
 public interface OneFragmentOneView {
     void onSuccess(TwoAdapterBean.ResultBean resultBeans);
+    void onShopSuccess(String result);
     void onFailer(String msg);
 }

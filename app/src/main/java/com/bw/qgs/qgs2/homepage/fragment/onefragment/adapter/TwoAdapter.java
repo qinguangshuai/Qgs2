@@ -24,6 +24,11 @@ public class TwoAdapter extends RecyclerView.Adapter<TwoAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<TwoAdapterBean.ResultBean.RxxpBean.CommodityListBean> list ;
+    private HttpOnClick mHttpOnClick;
+
+    public void setHttpOnClick(HttpOnClick httpOnClick) {
+        mHttpOnClick = httpOnClick;
+    }
 
     public TwoAdapter(Context context, List<TwoAdapterBean.ResultBean.RxxpBean.CommodityListBean> list ) {
         mContext = context;
@@ -34,7 +39,7 @@ public class TwoAdapter extends RecyclerView.Adapter<TwoAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.twoadapter, viewGroup, false);
-        MyViewHolder holder = new MyViewHolder(view);
+        MyViewHolder holder = new MyViewHolder(view,mHttpOnClick);
         return holder;
     }
 
@@ -56,11 +61,20 @@ public class TwoAdapter extends RecyclerView.Adapter<TwoAdapter.MyViewHolder> {
         TextView text,text1;
         ImageView image;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick) {
             super(itemView);
             image = itemView.findViewById(R.id.twoadapterimageView);
             text = itemView.findViewById(R.id.twoadaptertextView);
             text1 = itemView.findViewById(R.id.twoadaptertextView2);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    httpOnClick.click(v,getAdapterPosition());
+                }
+            });
         }
+    }
+    public interface HttpOnClick{
+        void click(View view,int position);
     }
 }
