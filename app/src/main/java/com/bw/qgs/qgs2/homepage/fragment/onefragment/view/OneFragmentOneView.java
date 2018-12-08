@@ -11,6 +11,9 @@ import java.util.List;
  */
 public interface OneFragmentOneView {
     void onSuccess(TwoAdapterBean.ResultBean resultBeans);
-    void onShopSuccess(String result);
+    //轮播图
+    void onBannerSuccess(String result);
+    void onQueryGoodsSuccess(String result);
+    void onOneDianSuccess(String result);
     void onFailer(String msg);
 }

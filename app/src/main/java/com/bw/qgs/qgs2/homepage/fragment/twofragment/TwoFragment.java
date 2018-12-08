@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.homepage.fragment.twofragment.adapter.TwoFragmentAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.twofragment.bean.TwoFragmentUser;
 import com.bw.qgs.qgs2.homepage.fragment.twofragment.presenter.TwoFragmentPresenter;
 import com.bw.qgs.qgs2.homepage.fragment.twofragment.view.TwoFragmentView;
 import com.bw.qgs.qgs2.url.UrlUtil;
 import com.google.gson.Gson;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
 
@@ -39,11 +39,13 @@ public class TwoFragment extends Fragment implements TwoFragmentView {
 
     @Override
     public void onSuccess(String result) {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        xrecycle.setLayoutManager(linearLayoutManager);
         Gson gson = new Gson();
         TwoFragmentUser twoFragmentUser = gson.fromJson(result, TwoFragmentUser.class);
         mResult1 = twoFragmentUser.getResult();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        xrecycle.setLayoutManager(linearLayoutManager);
+        TwoFragmentAdapter twoFragmentAdapter = new TwoFragmentAdapter(getActivity(),mResult1);
+        xrecycle.setAdapter(twoFragmentAdapter);
         //Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
     }
 

@@ -81,4 +81,9 @@ public class ReginActivity extends AppCompatActivity implements RegisnView {
     public void onResignFailer(String msg) {
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onKong() {
+        Toast.makeText(getApplicationContext(),"账号密码为空",Toast.LENGTH_SHORT).show();
+    }
 }

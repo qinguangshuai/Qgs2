@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.bw.qgs.qgs2.okhttp.OkHttpUtil;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -18,7 +17,7 @@ import okhttp3.Response;
  * fileName:TwoFragmentModel
  */
 public class TwoFragmentModel {
-    public void cicle(String url, final HttpCallBack httpCallBack){
+    public void cicle(String url, final HttpCal httpCal){
         OkHttpUtil.executeGet(url, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -31,7 +30,7 @@ public class TwoFragmentModel {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        httpCallBack.getData(s);
+                        httpCal.getQuanData(s);
                     }
                 });
             }
@@ -45,7 +44,7 @@ public class TwoFragmentModel {
         }
     };
 
-    public interface HttpCallBack{
-        void getData(String s);
+    public interface HttpCal{
+        void getQuanData(String s);
     }
 }

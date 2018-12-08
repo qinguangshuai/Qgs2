@@ -58,5 +58,9 @@
             android:text="消费时间"
             android:layout_weight="1"/>
     </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/walletRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

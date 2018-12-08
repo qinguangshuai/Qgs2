@@ -36,8 +36,8 @@ public class LoginModel {
                     public void run() {
                         Gson gson = new Gson();
                         LoginUser loginUser = gson.fromJson(string, LoginUser.class);
-                        LoginUser.ResultBean result = loginUser.getResult();
-                        httpCallBack.getData(string,loginUser);
+                        String message = loginUser.getStatus();
+                        httpCallBack.getData(message,loginUser);
                     }
                 });
             }

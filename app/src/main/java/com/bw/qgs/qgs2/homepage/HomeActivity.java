@@ -10,7 +10,6 @@ import android.widget.RadioGroup;
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.fivefragment.FiveFragment;
 import com.bw.qgs.qgs2.homepage.fragment.fourfragment.FourFragment;
-import com.bw.qgs.qgs2.homepage.fragment.onefragment.BlankFragment;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.OneFragment;
 import com.bw.qgs.qgs2.homepage.fragment.threefragment.ThreeFragment;
 import com.bw.qgs.qgs2.homepage.fragment.twofragment.TwoFragment;
@@ -28,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         initView();
         final ArrayList<Fragment> list = new ArrayList<>();
-        list.add(new BlankFragment());
+        list.add(new OneFragment());
         list.add(new TwoFragment());
         list.add(new ThreeFragment());
         list.add(new FourFragment());

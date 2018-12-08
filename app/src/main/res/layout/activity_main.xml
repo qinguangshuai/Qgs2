@@ -81,5 +81,8 @@
             android:textColor="#000"
             android:text="我的头像"/>
     </LinearLayout>
+    <com.bw.qgs.qgs2.homepage.fragment.twofragment.ady.Add
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

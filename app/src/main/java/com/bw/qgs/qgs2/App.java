@@ -1,12 +1,16 @@
 package com.bw.qgs.qgs2;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.bw.qgs.qgs2.okhttp.Constant;
 import com.bw.qgs.qgs2.okhttp.OkHttpUtil;
 import com.bw.qgs.qgs2.url.LogUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.HashMap;
 
@@ -16,21 +20,29 @@ import java.util.HashMap;
  * fileName:App
  */
 public class App extends Application {
+    public static Context mContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext=this;
         LogUtil.init();
         initHttpHeader();
         Fresco.initialize(this);
+        ImageLoaderConfiguration builder = new ImageLoaderConfiguration.Builder(this)
+                .threadPriority(3)
+                .build();
+        ImageLoader.getInstance().init(builder);
+        //清除缓存
+        ImageLoader.getInstance().clearDiscCache();
+        ImageLoader.getInstance().clearMemoryCache();
+        ImagePipeline pipeline = Fresco.getImagePipeline();
+        pipeline.clearCaches();
+        pipeline.clearDiskCaches();
+        pipeline.clearMemoryCaches();
     }
 
     private void initHttpHeader() {
-        HashMap<String,String> headers = new HashMap<>();
-        SharedPreferences sharedPreferences = getSharedPreferences("", MODE_PRIVATE);
-        headers.put("token",sharedPreferences.getString(Constant.TOKEN,""));
-        headers.put("version", "version1.0");
-        headers.put("platform", "android");
-        OkHttpUtil.init(headers);
+        OkHttpUtil.init();
     }
-
 }

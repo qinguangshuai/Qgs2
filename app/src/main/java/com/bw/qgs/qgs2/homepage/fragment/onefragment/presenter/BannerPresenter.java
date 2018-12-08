@@ -1,29 +1,28 @@
 package com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter;
 
-import com.bw.qgs.qgs2.homepage.fragment.onefragment.model.ShoeModel;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.model.BannerModel;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.view.OneFragmentOneView;
 
 /**
- * date:2018/12/4    11:28
+ * date:2018/12/5    11:00
  * author:秦广帅(Lenovo)
- * fileName:ShopPresenter
+ * fileName:BannerPresenter
  */
-public class ShoePresenter {
-
+public class BannerPresenter {
     private OneFragmentOneView mOneFragmentOneView;
-    private ShoeModel mShoeModel;
+    private BannerModel mBannerModel;
 
-    public ShoePresenter(OneFragmentOneView oneFragmentOneView) {
+    public BannerPresenter(OneFragmentOneView oneFragmentOneView) {
         mOneFragmentOneView = oneFragmentOneView;
-        mShoeModel = new ShoeModel();
+        mBannerModel = new BannerModel();
     }
 
-    public void shoe(String url){
-        mShoeModel.shope(url, new ShoeModel.HttpCallBack() {
+    public void banner(String url){
+        mBannerModel.banner(url, new BannerModel.HttpCallBac() {
             @Override
             public void getData(String s) {
                 if(s!=null){
-                    mOneFragmentOneView.onShopSuccess(s);
+                    mOneFragmentOneView.onBannerSuccess(s);
                 }else{
                     mOneFragmentOneView.onFailer("失败");
                 }

@@ -24,6 +24,11 @@ public class ThreeAdapter extends RecyclerView.Adapter<ThreeAdapter.MyViewHolder
 
     private Context mContext;
     private List<TwoAdapterBean.ResultBean.MlssBean.CommodityListBeanXX> list;
+    private HttpOnClick mHttpOnClick;
+
+    public void setHttpOnClick(HttpOnClick httpOnClick) {
+        mHttpOnClick = httpOnClick;
+    }
 
     public ThreeAdapter(Context context, List<TwoAdapterBean.ResultBean.MlssBean.CommodityListBeanXX> list) {
         mContext = context;
@@ -34,7 +39,7 @@ public class ThreeAdapter extends RecyclerView.Adapter<ThreeAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.threeadapter, viewGroup, false);
-        MyViewHolder holder = new MyViewHolder(view);
+        MyViewHolder holder = new MyViewHolder(view,mHttpOnClick);
         return holder;
     }
 
@@ -56,11 +61,21 @@ public class ThreeAdapter extends RecyclerView.Adapter<ThreeAdapter.MyViewHolder
         TextView text,text1;
         ImageView image;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick) {
             super(itemView);
             image = itemView.findViewById(R.id.threeadapterimageView);
             text = itemView.findViewById(R.id.threeadaptertextView);
             text1 = itemView.findViewById(R.id.threeadaptertextView2);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    httpOnClick.click(v,getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public interface HttpOnClick{
+        void click(View view,int position);
     }
 }

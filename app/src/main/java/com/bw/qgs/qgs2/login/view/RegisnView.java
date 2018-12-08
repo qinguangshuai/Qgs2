@@ -12,4 +12,5 @@ public interface RegisnView {
     void onResignSuccess(String result);
     void onFailer(String msg);
     void onResignFailer(String msg);
+    void onKong();
 }

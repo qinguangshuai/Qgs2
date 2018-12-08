@@ -1,55 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".homepage.fragment.onefragment.OneFragment">
 
+    <LinearLayout
+        android:id="@+id/recycleone1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <RelativeLayout
-            android:id="@+id/recycleone1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/lefticon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/common_nav_btn_menu_n_hdpi" />
+
             <TextView
                 android:id="@+id/righticon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
                 android:background="@drawable/common_nav_btn_search_n_hdpi" />
         </RelativeLayout>
+
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/onefragmentrecycle"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    <RelativeLayout
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/recycleone2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lefticon1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/common_nav_btn_menu_n_hdpi" />
+                <!--<EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/editshop"
+                    android:hint="111"/>-->
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/editshop" />
+
+                <TextView
+                    android:id="@+id/righticon1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/common_nav_btn_search_n_hdpi" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/onefragmentrecycle1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/recycleone3"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/lefticon1"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.youth.banner.Banner
+            android:id="@+id/onebanner"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="150dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/common_nav_btn_menu_n_hdpi" />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/oneprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="111"
+                android:layout_marginLeft="10dp"
+                android:textColor="#f00"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/onexiao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="111"/>
+        </LinearLayout>
         <TextView
-            android:id="@+id/righticon1"
-            android:layout_width="wrap_content"
+            android:id="@+id/onexiang"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/common_nav_btn_search_n_hdpi" />
-    </RelativeLayout>
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/onefragmentrecycle1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            android:padding="10dp"/>
+    </LinearLayout>
 </LinearLayout>

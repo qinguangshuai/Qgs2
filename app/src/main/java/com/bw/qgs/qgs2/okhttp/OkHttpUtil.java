@@ -28,15 +28,16 @@ public class OkHttpUtil {
     private static OkHttpClient client;
 
     //单例模式
-    public OkHttpUtil() {
+    private OkHttpUtil() {
+
     }
 
-    public static void init(Map headers) {
+    public static void init() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(new OKHeaderInterceptor(headers));
-        builder.addInterceptor(new OkLogInterceptor());
-        client = new OkHttpClient.Builder()
-                .build();
+            builder.retryOnConnectionFailure(true);
+            builder.addInterceptor(new OKHeaderInterceptor());
+            builder.addInterceptor(new OkLogInterceptor());
+            client=builder.build();
     }
 
     private static Request creat(String url, String method, BaseRequest baseRequest) {

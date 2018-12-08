@@ -35,7 +35,9 @@ public class ReginModel {
                     public void run() {
                         Gson gson = new Gson();
                         ReginUser reginUser = gson.fromJson(string, ReginUser.class);
+
                         String s = reginUser.getMessage();
+
                         httpCallBack.getData(s);
                     }
                 });

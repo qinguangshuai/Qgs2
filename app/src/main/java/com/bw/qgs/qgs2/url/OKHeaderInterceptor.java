@@ -1,5 +1,9 @@
 package com.bw.qgs.qgs2.url;
 
+import android.content.Context;
+
+import com.bw.qgs.qgs2.App;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,27 +20,19 @@ import okhttp3.Response;
  */
 public class OKHeaderInterceptor implements Interceptor {
 
-    private Map<String, String> headers;
 
-    public OKHeaderInterceptor(Map headers) {
-        if (headers != null) {
-            this.headers = headers;
-        }
-    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request.Builder builder = request.newBuilder();
-        if(headers!=null){
-            Set<String> set = headers.keySet();
-            Iterator<String> iterator = set.iterator();
-            while (iterator.hasNext()){
-                String next = iterator.next();
-                builder.addHeader(next,headers.get(next));
-            }
-        }
+
+        builder.addHeader("platform","android");
+        builder.addHeader("version","version1.0");
+        builder.addHeader("sessionId",App.mContext.getSharedPreferences("login",Context.MODE_PRIVATE).getString("sessionId",""));
+        builder.addHeader("userId",App.mContext.getSharedPreferences("login",Context.MODE_PRIVATE).getString("userId",""));
         request = builder.build();
         return chain.proceed(request);
+
     }
 }

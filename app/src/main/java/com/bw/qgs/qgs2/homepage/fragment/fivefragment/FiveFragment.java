@@ -14,12 +14,14 @@ import android.widget.TextView;
 
 import com.bw.qgs.qgs2.MainActivity;
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.circle.CircleActivity;
+import com.bw.qgs.qgs2.footer.FooterActivity;
 import com.bw.qgs.qgs2.wallet.WalletActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class FiveFragment extends Fragment {
 
-    private TextView address,datum,sistem,qianbaofive;
+    private TextView address,datum,sistem,qianbaofive,footprints,circletext;
     private SimpleDraweeView mypleasureimage;
 
     @Override
@@ -31,7 +33,9 @@ public class FiveFragment extends Fragment {
         mypleasureimage = view.findViewById(R.id.mypleasureimage);
         datum = view.findViewById(R.id.datum);
         sistem = view.findViewById(R.id.sistem);
+        footprints = view.findViewById(R.id.footprints);
         qianbaofive = view.findViewById(R.id.qianbaofive);
+        circletext = view.findViewById(R.id.circletext);
         SharedPreferences sp = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         String headPic = sp.getString("headPic", "");
         String nickName = sp.getString("nickName", "");
@@ -62,6 +66,20 @@ public class FiveFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),WalletActivity.class);
+                startActivity(intent);
+            }
+        });
+        footprints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),FooterActivity.class);
+                startActivity(intent);
+            }
+        });
+        circletext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CircleActivity.class);
                 startActivity(intent);
             }
         });

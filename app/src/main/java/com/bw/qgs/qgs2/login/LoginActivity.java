@@ -55,8 +55,7 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
     private String pwd;
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
-    private String mSessionId;
-    private int mUserId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +88,6 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
                 break;
             case R.id.login:
                 mLoginPresenter.login(UrlUtil.LOGIN1, phone + UrlUtil.LOGIN2, pwd, new BaseRequest());
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 Class<LoginUser> loginUserClass = LoginUser.class;
                 CusTomComment annotation = loginUserClass.getAnnotation(CusTomComment.class);
                 String name = annotation.userName();
@@ -108,16 +106,21 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
 
     @Override
     public void onSuccess(String result, LoginUser loginUser) {
-        mSessionId = loginUser.getResult().getSessionId();
-        mUserId = loginUser.getResult().getUserId();
+        Log.e("===",result);
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+      String   mSessionId = loginUser.getResult().getSessionId();
+       int mUserId = loginUser.getResult().getUserId();
+        Log.e("====",mSessionId);
         String headPic = loginUser.getResult().getHeadPic();
         String nickName = loginUser.getResult().getNickName();
+        Log.e("====",""+headPic);
+        Log.e("====",""+nickName);
         if (remember.isChecked()) {
             SharedPreferences.Editor edit = sp.edit();
             edit.putString("phone", phone);
             edit.putString("pwd", pwd);
             edit.putString("sessionId", mSessionId);
-            edit.putInt("userId", mUserId);
+            edit.putString("userId", ""+mUserId);
             edit.putString("headPic",headPic);
             edit.putString("nickName",nickName);
             edit.putBoolean("remember", remember.isChecked());
@@ -126,18 +129,17 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
             edit.putString("phone", "");
             edit.putString("pwd", "");
             edit.putString("sessionId", mSessionId);
-            edit.putInt("userId", mUserId);
+            edit.putString("userId",""+ mUserId);
             edit.putString("headPic",headPic);
             edit.putString("nickName",nickName);
             edit.putBoolean("remember", remember.isChecked());
             edit.commit();
         }
-        Log.e("===",result);
     }
 
     @Override
     public void onResignSuccess(String result) {
-
+        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -147,7 +149,12 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
 
     @Override
     public void onResignFailer(String msg) {
+        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onKong() {
+        Toast.makeText(getApplicationContext(),"账号密码为空",Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.visible)

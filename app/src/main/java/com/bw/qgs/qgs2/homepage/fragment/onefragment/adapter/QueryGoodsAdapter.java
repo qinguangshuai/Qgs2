@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
-import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.ShoeUser;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.QueryGoods;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,34 +20,35 @@ import java.util.List;
  * author:秦广帅(Lenovo)
  * fileName:ShoeAdapter
  */
-public class ShoeAdapter extends RecyclerView.Adapter<ShoeAdapter.MyViewHolder> {
+public class QueryGoodsAdapter extends RecyclerView.Adapter<QueryGoodsAdapter.MyViewHolder> {
 
     private Context mContext;
-    private ShoeUser.ResultBean mResult1;
+    private List<QueryGoods.ResultBean> mGoodsResult;
 
-    public ShoeAdapter(Context context, ShoeUser.ResultBean result1) {
+    public QueryGoodsAdapter(Context context, List<QueryGoods.ResultBean> goodsResult) {
         mContext = context;
-        mResult1 = result1;
+        mGoodsResult = goodsResult;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.shoe, viewGroup, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.goods, viewGroup, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        Picasso.with(mContext).load(mResult1.getDetails()).into(myViewHolder.image);
-        myViewHolder.text1.setText(mResult1.getCommodityName());
-        myViewHolder.text1.setText(mResult1.getPrice()+"");
+        QueryGoods.ResultBean resultBean = mGoodsResult.get(i);
+        Picasso.with(mContext).load(resultBean.getMasterPic()).into(myViewHolder.image);
+        myViewHolder.text1.setText(resultBean.getCommodityName());
+        myViewHolder.text2.setText(resultBean.getPrice()+"");
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return mGoodsResult.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
@@ -58,9 +59,9 @@ public class ShoeAdapter extends RecyclerView.Adapter<ShoeAdapter.MyViewHolder> 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.shoeimageView);
-            text1 = itemView.findViewById(R.id.shoetextView);
-            text2 = itemView.findViewById(R.id.shoetextView2);
+            image = itemView.findViewById(R.id.goodsimageView);
+            text1 = itemView.findViewById(R.id.goodstextView);
+            text2 = itemView.findViewById(R.id.goodstextView2);
         }
     }
 }

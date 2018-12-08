@@ -18,9 +18,9 @@ public class TwoFragmentPresenter {
     }
 
     public void cicle(String url){
-        mTwoFragmentModel.cicle(url, new TwoFragmentModel.HttpCallBack() {
+        mTwoFragmentModel.cicle(url, new TwoFragmentModel.HttpCal() {
             @Override
-            public void getData(String s) {
+            public void getQuanData(String s) {
                 if(s!=null){
                     mTwoFragmentView.onSuccess(s);
                 }else{

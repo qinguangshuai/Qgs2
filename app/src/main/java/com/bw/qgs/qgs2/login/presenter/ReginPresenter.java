@@ -1,5 +1,7 @@
 package com.bw.qgs.qgs2.login.presenter;
 
+import android.text.TextUtils;
+
 import com.bw.qgs.qgs2.login.model.ReginModel;
 import com.bw.qgs.qgs2.login.view.RegisnView;
 import com.bw.qgs.qgs2.url.BaseRequest;
@@ -19,6 +21,9 @@ public class ReginPresenter {
     }
 
     public void regin(String url, String phone, String pwd, BaseRequest baseRequest) {
+        if(TextUtils.isEmpty(phone)||TextUtils.isEmpty(pwd)){
+            mRegisnView.onKong();
+        }
         mReginModel.regin(url, phone, pwd, baseRequest, new ReginModel.HttpCallBack() {
             @Override
             public void getData(String s) {

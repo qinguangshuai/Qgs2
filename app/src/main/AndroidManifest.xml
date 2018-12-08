@@ -22,7 +22,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".login.ReginActivity" />
         <activity android:name=".homepage.HomeActivity" />
-        <activity android:name=".wallet.WalletActivity"></activity>
+        <activity android:name=".wallet.WalletActivity" />
+        <activity android:name=".footer.FooterActivity" />
+        <activity android:name=".circle.CircleActivity" />
+        <activity android:name=".homepage.fragment.particulars.GoodsParticularsActivity"></activity>
     </application>
 
 </manifest>
