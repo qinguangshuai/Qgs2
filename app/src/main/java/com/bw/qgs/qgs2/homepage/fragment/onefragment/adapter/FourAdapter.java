@@ -48,7 +48,7 @@ public class FourAdapter extends RecyclerView.Adapter<FourAdapter.MyViewHolder> 
         TwoAdapterBean.ResultBean.PzshBean.CommodityListBeanX commodityListBeanX = list.get(i);
         Picasso.with(mContext).load(commodityListBeanX.getMasterPic()).into(myViewHolder.image);
         myViewHolder.text.setText(commodityListBeanX.getCommodityName());
-        myViewHolder.text1.setText(commodityListBeanX.getPrice()+"");
+        myViewHolder.text1.setText("$ "+commodityListBeanX.getPrice());
     }
 
     @Override

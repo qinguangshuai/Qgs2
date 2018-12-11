@@ -1,10 +1,10 @@
 package com.bw.qgs.qgs2.homepage.fragment.particulars;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.particulars.adapter.GoodsParticularsAdapter;
@@ -24,10 +24,11 @@ public class GoodsParticularsActivity extends AppCompatActivity implements Goods
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_particulars);
         recycle = findViewById(R.id.goodspartrecycle);
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
         mGoodsParticularsPresenter = new GoodsParticularsPresenter(this);
-        mGoodsParticularsPresenter.par(UrlUtil.GOODSPARTICU);
+        mGoodsParticularsPresenter.par(UrlUtil.GOODSPARTICU+id);
         mGoodsParticularsAdapter = new GoodsParticularsAdapter(getApplicationContext(),null);
-
     }
 
     @Override

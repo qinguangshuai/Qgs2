@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.OneDianBean;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.YiJi;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,61 +22,47 @@ import java.util.List;
  * author:秦广帅(Lenovo)
  * fileName:TwoFragmentAdapter
  */
-public class OneDianAdapter extends RecyclerView.Adapter<OneDianAdapter.TwoViewHolder> {
+public class YiAdapter extends RecyclerView.Adapter<YiAdapter.TwoViewHolder> {
 
     private Context mContext;
-    private List<OneDianBean.ResultBean> dianlist;
+    private List<YiJi.ResultBean> mResult1;
     private HttpClick click;
 
     public void setClick(HttpClick click) {
         this.click = click;
     }
 
-    public OneDianAdapter(Context context, List<OneDianBean.ResultBean> dianlist) {
+    public YiAdapter(Context context, List<YiJi.ResultBean> result1) {
         mContext = context;
-        this.dianlist = dianlist;
+        mResult1 = result1;
     }
 
     @NonNull
     @Override
     public TwoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.dian1, viewGroup, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.yi, viewGroup, false);
         TwoViewHolder holder = new TwoViewHolder(view,click);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull TwoViewHolder twoViewHolder, int i) {
-        OneDianBean.ResultBean bean = dianlist.get(i);
-        Picasso.with(mContext).load(bean.getMasterPic()).into(twoViewHolder.image);
-        twoViewHolder.text1.setText(bean.getCommodityName());
-        twoViewHolder.text2.setText("$ "+bean.getPrice());
-        if(i!=0){
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(twoViewHolder.image.getLayoutParams());
-            params.setMargins(0,100,0,0);
-            twoViewHolder.image.setLayoutParams(params);
-        }else{
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(twoViewHolder.image.getLayoutParams());
-            params.setMargins(0,40,0,0);
-            twoViewHolder.image.setLayoutParams(params);
-        }
+        YiJi.ResultBean bean = mResult1.get(i);
+        twoViewHolder.text1.setText(bean.getName());
     }
 
     @Override
     public int getItemCount() {
-        return dianlist.size();
+        return mResult1.size();
     }
 
     class TwoViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
-        TextView text1,text2;
+        TextView text1;
 
         public TwoViewHolder(@NonNull View itemView, final HttpClick click) {
             super(itemView);
-            image = itemView.findViewById(R.id.dian1imageView);
-            text1 = itemView.findViewById(R.id.dian1textView);
-            text2 = itemView.findViewById(R.id.dian1textView2);
+            text1 = itemView.findViewById(R.id.yitextView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,6 +73,6 @@ public class OneDianAdapter extends RecyclerView.Adapter<OneDianAdapter.TwoViewH
     }
 
     public interface HttpClick{
-        void click(View view,int position);
+        void click(View view, int position);
     }
 }

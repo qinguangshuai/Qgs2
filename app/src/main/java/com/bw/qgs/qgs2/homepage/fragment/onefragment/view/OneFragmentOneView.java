@@ -16,4 +16,7 @@ public interface OneFragmentOneView {
     void onQueryGoodsSuccess(String result);
     void onOneDianSuccess(String result);
     void onFailer(String msg);
+    //查询
+    void onQuerySuccess(String result);
+    void onJiSuccess(String result);
 }

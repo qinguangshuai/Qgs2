@@ -25,7 +25,9 @@
         <activity android:name=".wallet.WalletActivity" />
         <activity android:name=".footer.FooterActivity" />
         <activity android:name=".circle.CircleActivity" />
-        <activity android:name=".homepage.fragment.particulars.GoodsParticularsActivity"></activity>
+        <activity android:name=".homepage.fragment.particulars.GoodsParticularsActivity" />
+        <activity android:name=".myaddress.AddressActivity" />
+        <activity android:name=".xinzeng.XinZengActivity"></activity>
     </application>
 
 </manifest>

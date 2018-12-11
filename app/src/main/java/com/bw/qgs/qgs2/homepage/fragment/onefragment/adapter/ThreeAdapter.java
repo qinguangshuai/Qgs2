@@ -48,7 +48,7 @@ public class ThreeAdapter extends RecyclerView.Adapter<ThreeAdapter.MyViewHolder
         TwoAdapterBean.ResultBean.MlssBean.CommodityListBeanXX commodityListBeanXX = list.get(i);
         Picasso.with(mContext).load(commodityListBeanXX.getMasterPic()).into(myViewHolder.image);
         myViewHolder.text.setText(commodityListBeanXX.getCommodityName());
-        myViewHolder.text1.setText(commodityListBeanXX.getPrice()+"");
+        myViewHolder.text1.setText("$ "+commodityListBeanXX.getPrice());
     }
 
     @Override

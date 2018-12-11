@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.circle.bean.CicleUser;
 import com.bw.qgs.qgs2.footer.adapter.FooterAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class MyCicleAdapter extends RecyclerView.Adapter<MyCicleAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         CicleUser.ResultBean bean = list.get(i);
-        myViewHolder.text.setText(bean.getNickName());
+        //Picasso.with(mContext).load(bean.getImage()).into(myViewHolder.image);
+        myViewHolder.text.setText(bean.getContent());
     }
 
     @Override

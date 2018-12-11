@@ -20,19 +20,15 @@ import okhttp3.Response;
  */
 public class OKHeaderInterceptor implements Interceptor {
 
-
-
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request.Builder builder = request.newBuilder();
-
         builder.addHeader("platform","android");
         builder.addHeader("version","version1.0");
         builder.addHeader("sessionId",App.mContext.getSharedPreferences("login",Context.MODE_PRIVATE).getString("sessionId",""));
         builder.addHeader("userId",App.mContext.getSharedPreferences("login",Context.MODE_PRIVATE).getString("userId",""));
         request = builder.build();
         return chain.proceed(request);
-
     }
 }

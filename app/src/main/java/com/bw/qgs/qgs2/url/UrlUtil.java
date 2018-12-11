@@ -20,5 +20,13 @@ public interface UrlUtil {
     public String FOOTER = "http://172.17.8.100/small/commodity/verify/v1/browseList?page=1&count=5";
     public String MYCIRCLE = "http://172.17.8.100/small/circle/verify/v1/findMyCircleById?page=1&count=5";
     //  商品详情
-    public String GOODSPARTICU = "http://172.17.8.100/small/commodity/v1/findCommodityDetailsById?commodityId=6";
+    public String GOODSPARTICU = "http://172.17.8.100/small/commodity/v1/findCommodityDetailsById?commodityId=";
+    //查询
+    public String QUERY = "http://172.17.8.100/small/commodity/v1/findCommodityByKeyword?page=1&count=99&keyword=";
+    public String ADDRESS = "http://172.17.8.100/small/user/verify/v1/receiveAddressList";
+    public String YIJI = "http://172.17.8.100/small/commodity/v1/findFirstCategory";
+    public String XINZENG1 = "http://172.17.8.100/small/user/verify/v1/addReceiveAddress?realName=";
+    public String XINZENG2 = "&phone=";
+    public String XINZENG3 = "&address=";
+    public String XINZENG4 = "&zipCode=";
 }

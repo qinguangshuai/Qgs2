@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".xinzeng.XinZengActivity">
+
+    <EditText
+        android:id="@+id/xinedit1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="realName"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/xinedit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="phone"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/xinedit3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="address"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/xinedit4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="zipCode"
+        android:padding="10dp"/>
+    <Button
+        android:id="@+id/xinbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加"
+        android:layout_gravity="center"/>
+</LinearLayout>

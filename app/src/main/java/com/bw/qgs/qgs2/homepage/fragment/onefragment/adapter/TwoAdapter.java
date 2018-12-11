@@ -48,7 +48,7 @@ public class TwoAdapter extends RecyclerView.Adapter<TwoAdapter.MyViewHolder> {
         TwoAdapterBean.ResultBean.RxxpBean.CommodityListBean commodityListBean = list.get(i);
         Picasso.with(mContext).load(commodityListBean.getMasterPic()).into(myViewHolder.image);
         myViewHolder.text.setText(commodityListBean.getCommodityName());
-        myViewHolder.text1.setText(commodityListBean.getPrice()+"");
+        myViewHolder.text1.setText("$ "+commodityListBean.getPrice());
     }
 
     @Override

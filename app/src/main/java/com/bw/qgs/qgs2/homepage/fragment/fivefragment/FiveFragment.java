@@ -16,6 +16,7 @@ import com.bw.qgs.qgs2.MainActivity;
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.circle.CircleActivity;
 import com.bw.qgs.qgs2.footer.FooterActivity;
+import com.bw.qgs.qgs2.myaddress.AddressActivity;
 import com.bw.qgs.qgs2.wallet.WalletActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -50,7 +51,8 @@ public class FiveFragment extends Fragment {
         address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(),AddressActivity.class);
+                startActivity(intent);
             }
         });
         datum.setOnClickListener(new View.OnClickListener() {

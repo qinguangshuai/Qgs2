@@ -8,18 +8,97 @@
         android:background="#1a1919"
         android:alpha="0.7"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="男装"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:layout_weight="1"
+                android:text="女装"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="女鞋"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:layout_weight="1"
+                android:text="T恤"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:layout_weight="1"
+                android:text="没装护肤"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:background="#646161"
         android:alpha="0.7">
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/category_icon_coat_n_hdpi"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/category_icon_hoodie_n_hdpi"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:background="@drawable/category_icon_pants_n_hdpi"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/category_icon_skirt_n_hdpi"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/category_icon_sweater_n_hdpi"/>
     </LinearLayout>
+    <!--<android.support.v7.widget.RecyclerView
+        android:id="@+id/pop1recycle"
+        android:layout_width="match_parent"
+        android:alpha="0.7"
+        android:layout_height="50dp"/>-->
 
 </LinearLayout>

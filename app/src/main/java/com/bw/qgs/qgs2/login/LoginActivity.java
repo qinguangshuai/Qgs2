@@ -106,32 +106,32 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
 
     @Override
     public void onSuccess(String result, LoginUser loginUser) {
-        Log.e("===",result);
+        Log.e("===", result);
         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-      String   mSessionId = loginUser.getResult().getSessionId();
-       int mUserId = loginUser.getResult().getUserId();
-        Log.e("====",mSessionId);
+        String mSessionId = loginUser.getResult().getSessionId();
+        int mUserId = loginUser.getResult().getUserId();
+        Log.e("====", mSessionId);
         String headPic = loginUser.getResult().getHeadPic();
         String nickName = loginUser.getResult().getNickName();
-        Log.e("====",""+headPic);
-        Log.e("====",""+nickName);
+        Log.e("====", "" + headPic);
+        Log.e("====", "" + nickName);
         if (remember.isChecked()) {
             SharedPreferences.Editor edit = sp.edit();
             edit.putString("phone", phone);
             edit.putString("pwd", pwd);
             edit.putString("sessionId", mSessionId);
-            edit.putString("userId", ""+mUserId);
-            edit.putString("headPic",headPic);
-            edit.putString("nickName",nickName);
+            edit.putString("userId", "" + mUserId);
+            edit.putString("headPic", headPic);
+            edit.putString("nickName", nickName);
             edit.putBoolean("remember", remember.isChecked());
             edit.commit();
         } else {
             edit.putString("phone", "");
             edit.putString("pwd", "");
             edit.putString("sessionId", mSessionId);
-            edit.putString("userId",""+ mUserId);
-            edit.putString("headPic",headPic);
-            edit.putString("nickName",nickName);
+            edit.putString("userId", "" + mUserId);
+            edit.putString("headPic", headPic);
+            edit.putString("nickName", nickName);
             edit.putBoolean("remember", remember.isChecked());
             edit.commit();
         }
@@ -149,12 +149,12 @@ public class LoginActivity extends AppCompatActivity implements RegisnView {
 
     @Override
     public void onResignFailer(String msg) {
-        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onKong() {
-        Toast.makeText(getApplicationContext(),"账号密码为空",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "账号密码为空", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.visible)

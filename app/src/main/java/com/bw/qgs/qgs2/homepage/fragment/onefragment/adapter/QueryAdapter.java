@@ -10,58 +10,57 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
-import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.QueryGoods;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.QueryUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
- * date:2018/12/4    11:39
+ * date:2018/12/9    12:01
  * author:秦广帅(Lenovo)
- * fileName:ShoeAdapter
+ * fileName:QueryAdapter
  */
-public class QueryGoodsAdapter extends RecyclerView.Adapter<QueryGoodsAdapter.MyViewHolder> {
+public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<QueryGoods.ResultBean> mGoodsResult;
+    private List<QueryUser.ResultBean> mResultBeans;
 
-    public QueryGoodsAdapter(Context context, List<QueryGoods.ResultBean> goodsResult) {
+    public QueryAdapter(Context context, List<QueryUser.ResultBean> resultBeans) {
         mContext = context;
-        mGoodsResult = goodsResult;
+        mResultBeans = resultBeans;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.goods, viewGroup, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.query, viewGroup, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        QueryGoods.ResultBean resultBean = mGoodsResult.get(i);
-        Picasso.with(mContext).load(resultBean.getMasterPic()).into(myViewHolder.image);
-        myViewHolder.text1.setText(resultBean.getCommodityName());
-        myViewHolder.text2.setText("$ "+resultBean.getPrice());
+        QueryUser.ResultBean bean = mResultBeans.get(i);
+        Picasso.with(mContext).load(bean.getMasterPic()).into(myViewHolder.image);
+        myViewHolder.text1.setText(bean.getCommodityName());
+        myViewHolder.text2.setText("$ "+bean.getPrice());
     }
 
     @Override
     public int getItemCount() {
-        return mGoodsResult.size();
+        return mResultBeans.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
-        TextView text1;
-        TextView text2;
+        TextView text1,text2;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.goodsimageView);
-            text1 = itemView.findViewById(R.id.goodstextView);
-            text2 = itemView.findViewById(R.id.goodstextView2);
+            image = itemView.findViewById(R.id.queryimageView);
+            text1 = itemView.findViewById(R.id.querytextView);
+            text2 = itemView.findViewById(R.id.querytextView2);
         }
     }
 }
