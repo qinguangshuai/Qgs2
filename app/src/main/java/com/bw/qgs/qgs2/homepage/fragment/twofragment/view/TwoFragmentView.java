@@ -7,5 +7,6 @@ package com.bw.qgs.qgs2.homepage.fragment.twofragment.view;
  */
 public interface TwoFragmentView {
     void onSuccess(String result);
+    void onZanSuccess(String result);
     void onFailer(String msg);
 }

@@ -25,6 +25,7 @@ public class TwoFragment extends Fragment implements TwoFragmentView {
     private TwoFragmentPresenter mTwoFragmentPresenter;
     private RecyclerView xrecycle;
     private List<TwoFragmentUser.ResultBean> mResult1;
+    private ZanPresenter mZanPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +35,7 @@ public class TwoFragment extends Fragment implements TwoFragmentView {
         xrecycle = view.findViewById(R.id.twofragmentxrecycle);
         mTwoFragmentPresenter = new TwoFragmentPresenter(this);
         mTwoFragmentPresenter.cicle(UrlUtil.CICLE);
+        mZanPresenter = new ZanPresenter(this);
         return view;
     }
 
@@ -44,9 +46,26 @@ public class TwoFragment extends Fragment implements TwoFragmentView {
         Gson gson = new Gson();
         TwoFragmentUser twoFragmentUser = gson.fromJson(result, TwoFragmentUser.class);
         mResult1 = twoFragmentUser.getResult();
-        TwoFragmentAdapter twoFragmentAdapter = new TwoFragmentAdapter(getActivity(),mResult1);
+        TwoFragmentAdapter twoFragmentAdapter = new TwoFragmentAdapter(getActivity(), mResult1);
+        twoFragmentAdapter.setHttpZan(new TwoFragmentAdapter.HttpZan() {
+            @Override
+            public void getZan(View v, int position) {
+                mZanPresenter.postZanMethod(UrlUtil.ZAN, mResult1.get(position).getId());
+
+            }
+        });
         xrecycle.setAdapter(twoFragmentAdapter);
-        //Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onZanSuccess(String result) {
+        Gson gson = new Gson();
+        ZanUser zanUser = gson.fromJson(result, ZanUser.class);
+        String status = zanUser.getStatus();
+        if (status.equals("0000")) {
+            Toast.makeText(getActivity(), "成功", Toast.LENGTH_SHORT).show();
+        }
+        Toast.makeText(getActivity(), "失败", Toast.LENGTH_SHORT).show();
     }
 
     @Override

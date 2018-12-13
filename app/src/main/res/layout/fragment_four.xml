@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".homepage.fragment.fourfragment.FourFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RadioGroup
+        android:id="@+id/fourrg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#e9dede"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/fourbtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部订单"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/common_icon_all_list_n_hdpi"
+            android:gravity="center"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/fourbtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="代付款"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/common_icon_pay_n_hdpi"
+            android:gravity="center"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/fourbtn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待收货"
+            android:gravity="center"
+            android:drawableTop="@drawable/common_icon_receive_n"
+            android:layout_weight="1"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/fourbtn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待评价"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/commom_icon_comment_n_hdpi"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/fourbtn5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已完成"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/common_icon_finish_n_hdpi"
+            android:button="@null"/>
+    </RadioGroup>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fourpager"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="#dfdddd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="4/hello_blank_fragment" />
+        android:layout_weight="1"/>
 
-</FrameLayout>
+</LinearLayout>

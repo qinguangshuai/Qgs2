@@ -17,10 +17,15 @@
         android:textColor="#000"
         android:text="TextView" />
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/circleimageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_weight="1"
         tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/creatcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
 </LinearLayout>

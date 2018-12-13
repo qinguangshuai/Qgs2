@@ -27,7 +27,11 @@
         <activity android:name=".circle.CircleActivity" />
         <activity android:name=".homepage.fragment.particulars.GoodsParticularsActivity" />
         <activity android:name=".myaddress.AddressActivity" />
-        <activity android:name=".xinzeng.XinZengActivity"></activity>
+        <activity android:name=".xinzeng.XinZengActivity" />
+        <activity android:name=".updataname.UpdataNameActivity" />
+        <activity android:name=".updataname.UpdataActivity" />
+        <activity android:name=".xinzeng.UpdateAddressActivity" />
+        <activity android:name=".updataname.UpdatePwdActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.OneDianBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -48,6 +50,8 @@ public class OneDianAdapter extends RecyclerView.Adapter<OneDianAdapter.TwoViewH
     public void onBindViewHolder(@NonNull TwoViewHolder twoViewHolder, int i) {
         OneDianBean.ResultBean bean = dianlist.get(i);
         Picasso.with(mContext).load(bean.getMasterPic()).into(twoViewHolder.image);
+        Uri uri = Uri.parse(bean.getMasterPic());
+        twoViewHolder.image.setImageURI(uri);
         twoViewHolder.text1.setText(bean.getCommodityName());
         twoViewHolder.text2.setText("$ "+bean.getPrice());
         if(i!=0){
@@ -68,7 +72,7 @@ public class OneDianAdapter extends RecyclerView.Adapter<OneDianAdapter.TwoViewH
 
     class TwoViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
+        SimpleDraweeView image;
         TextView text1,text2;
 
         public TwoViewHolder(@NonNull View itemView, final HttpClick click) {

@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bw.qgs.qgs2.updataname.UpdataActivity;
+import com.bw.qgs.qgs2.updataname.UpdatePwdActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +38,22 @@ public class MainActivity extends AppCompatActivity {
         String nickName = sp.getString("nickName", "");
         nicheng.setText(nickName);
         mima.setText(pwd);
+        nicheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,UpdataActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        mima.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,UpdatePwdActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     float x1, x2;

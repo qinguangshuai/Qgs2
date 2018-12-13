@@ -42,7 +42,7 @@ public class App extends Application {
         pipeline.clearMemoryCaches();
     }
 
-    private void initHttpHeader() {
+    public void initHttpHeader() {
         OkHttpUtil.init();
     }
 }

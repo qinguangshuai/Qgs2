@@ -7,7 +7,7 @@
     android:padding="10dp"
     android:orientation="vertical">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/queryimageView"
         android:layout_width="150dp"
         android:layout_height="150dp"

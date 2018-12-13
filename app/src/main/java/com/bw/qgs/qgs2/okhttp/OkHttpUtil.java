@@ -3,6 +3,7 @@ package com.bw.qgs.qgs2.okhttp;
 import com.bw.qgs.qgs2.url.BaseRequest;
 import com.bw.qgs.qgs2.url.OKHeaderInterceptor;
 import com.bw.qgs.qgs2.url.OkLogInterceptor;
+import com.bw.qgs.qgs2.url.UrlUtil;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -17,6 +18,10 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * date:2018/12/1    11:58
@@ -32,6 +37,7 @@ public class OkHttpUtil {
     public static final String MEDIO_PUT = "PUT";
     public static final String MEDIO_DELETE = "DELETE";
     private static OkHttpClient client;
+    public static Retrofit retrofit;
 
     //单例模式
     private OkHttpUtil() {
@@ -40,10 +46,17 @@ public class OkHttpUtil {
 
     public static void init() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.retryOnConnectionFailure(true);
-            builder.addInterceptor(new OKHeaderInterceptor());
-            builder.addInterceptor(new OkLogInterceptor());
-            client=builder.build();
+        builder.retryOnConnectionFailure(true);
+        builder.addInterceptor(new OKHeaderInterceptor());
+        builder.addInterceptor(new OkLogInterceptor());
+        client = builder.build();
+        retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(UrlUtil.ZONG)
+                .client(client)
+                .build();
     }
 
     private static Request creat(String url, String method, BaseRequest baseRequest) {
@@ -63,14 +76,14 @@ public class OkHttpUtil {
                 request = builder.build();
                 break;
             case MEDIO_PUT:
-                if(requestBody != null){
+                if (requestBody != null) {
                     request = builder.put(requestBody).build();
                 }
                 break;
             case MEDIO_DELETE:
-                if(requestBody != null){
+                if (requestBody != null) {
                     request = builder.delete(requestBody).build();
-                }else{
+                } else {
                     request = builder.delete().build();
                 }
                 break;
@@ -84,22 +97,28 @@ public class OkHttpUtil {
         call.enqueue(callback);
     }
 
-    public static void executeGet(String url,Callback callback){
-        Request request = creat(url, MEDIO_GET,null);
+    public static void executePut(String url, Map params, Callback callback) {
+        Request request = creat(url, MEDIO_PUT, null);
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
 
-    public static Request creatMuityFormRequest(String url,String fileparam,File file,Map<String,String> params){
+    public static void executeGet(String url, Callback callback) {
+        Request request = creat(url, MEDIO_GET, null);
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public static Request creatMuityFormRequest(String url, String fileparam, File file, Map<String, String> params) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         MultipartBody multipartBody = null;
         MultipartBody.Builder builder = new MultipartBody.Builder();
-        if(params!=null){
+        if (params != null) {
             Set<String> keySet = params.keySet();
             Iterator<String> iterator = keySet.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 String next = iterator.next();
-                builder.addFormDataPart(next,params.get(next));
+                builder.addFormDataPart(next, params.get(next));
             }
         }
         multipartBody = builder.addFormDataPart(fileparam, file.getName(), requestBody).build();
@@ -108,7 +127,7 @@ public class OkHttpUtil {
         return request;
     }
 
-    public static void upLoad(String url,String fileParam,File file,Map<String,String> params,Callback callback){
+    public static void upLoad(String url, String fileParam, File file, Map<String, String> params, Callback callback) {
         Request request = creatMuityFormRequest(url, fileParam, file, params);
         Call call = client.newCall(request);
         call.enqueue(callback);

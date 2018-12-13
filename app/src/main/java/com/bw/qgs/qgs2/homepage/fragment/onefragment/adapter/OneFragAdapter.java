@@ -252,7 +252,7 @@ public class OneFragAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    httpOnClick.click(v,list.getRxxp().get(0).getId());
+                    httpOnClick.click(v,getAdapterPosition());
                 }
             });
         }

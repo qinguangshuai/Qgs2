@@ -1,6 +1,7 @@
 package com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.QueryUser;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -41,7 +43,8 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         QueryUser.ResultBean bean = mResultBeans.get(i);
-        Picasso.with(mContext).load(bean.getMasterPic()).into(myViewHolder.image);
+        Uri uri = Uri.parse(bean.getMasterPic());
+        myViewHolder.image.setImageURI(uri);
         myViewHolder.text1.setText(bean.getCommodityName());
         myViewHolder.text2.setText("$ "+bean.getPrice());
     }
@@ -53,7 +56,7 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.MyViewHolder
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
+        SimpleDraweeView image;
         TextView text1,text2;
 
         public MyViewHolder(@NonNull View itemView) {

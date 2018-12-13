@@ -9,5 +9,6 @@ import com.bw.qgs.qgs2.homepage.fragment.particulars.bean.Particulars;
  */
 public interface GoodsParticularView {
     void onGoodsParticuSuccess(Particulars.ResultBean resultBean);
+    void onShopSuccess(String result);
     void onGoodsParticuFailer(String msg);
 }

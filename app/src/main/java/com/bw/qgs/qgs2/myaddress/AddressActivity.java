@@ -14,11 +14,14 @@ import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.myaddress.adapter.AddressAdapter;
 import com.bw.qgs.qgs2.myaddress.bean.AddressUser;
 import com.bw.qgs.qgs2.myaddress.presenter.AddressPresenter;
+import com.bw.qgs.qgs2.myaddress.presenter.MoPresenter;
 import com.bw.qgs.qgs2.myaddress.view.AddressView;
+import com.bw.qgs.qgs2.url.BaseRequest;
 import com.bw.qgs.qgs2.url.UrlUtil;
 import com.bw.qgs.qgs2.wallet.WalletActivity;
 import com.bw.qgs.qgs2.wallet.adapter.WalletAdapter;
 import com.bw.qgs.qgs2.wallet.bean.WalletUser;
+import com.bw.qgs.qgs2.xinzeng.UpdateAddressActivity;
 import com.bw.qgs.qgs2.xinzeng.XinZengActivity;
 import com.google.gson.Gson;
 
@@ -38,6 +41,7 @@ public class AddressActivity extends AppCompatActivity implements AddressView {
     Button insertaddress;
     private AddressPresenter mAddressPresenter;
     private List<AddressUser.ResultBean> mResult1;
+    private MoPresenter mMoPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class AddressActivity extends AppCompatActivity implements AddressView {
         ButterKnife.bind(this);
         mAddressPresenter = new AddressPresenter(this);
         mAddressPresenter.addre(UrlUtil.ADDRESS);
+        mMoPresenter = new MoPresenter(this);
     }
 
     @OnClick({R.id.finishaddress, R.id.insertaddress})
@@ -60,17 +65,40 @@ public class AddressActivity extends AppCompatActivity implements AddressView {
     }
 
     @Override
-    public void onSuccess(String result) {
+    public void onSuccess(final String result) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         addressrecycle.setLayoutManager(linearLayoutManager);
         Gson gson = new Gson();
         AddressUser addressUser = gson.fromJson(result, AddressUser.class);
         mResult1 = addressUser.getResult();
-        AddressAdapter walletAdapter = new AddressAdapter(getApplicationContext(), mResult1);
-        walletAdapter.setHttpOnClick(new AddressAdapter.HttpOnClick() {
+        final AddressAdapter walletAdapter = new AddressAdapter(getApplicationContext(), mResult1);
+        /*walletAdapter.setHttpOnClick(new AddressAdapter.HttpOnClick() {
             @Override
             public void click(View view, int position) {
-
+                walletAdapter.setHttpOnClick(new AddressAdapter.HttpOnClick() {
+                    @Override
+                    public void click(View view, int position) {
+                        int id = mResult1.get(position).getId();
+                        mMoPresenter.mo(UrlUtil.MOREN+id,new BaseRequest());
+                    }
+                });
+            }
+        });*/
+        walletAdapter.setHttpXiuOnClick(new AddressAdapter.HttpXiuOnClick() {
+            @Override
+            public void click(View view, int position) {
+                Intent intent = new Intent(AddressActivity.this,UpdateAddressActivity.class);
+                int id = mResult1.get(position).getId();
+                String realName = mResult1.get(position).getRealName();
+                String phone = mResult1.get(position).getPhone();
+                String address = mResult1.get(position).getAddress();
+                String zipCode = mResult1.get(position).getZipCode();
+                intent.putExtra("id",id);
+                intent.putExtra("realName",realName);
+                intent.putExtra("phone",phone);
+                intent.putExtra("address",address);
+                intent.putExtra("zipCode",zipCode);
+                startActivity(intent);
             }
         });
         addressrecycle.setAdapter(walletAdapter);
@@ -78,7 +106,12 @@ public class AddressActivity extends AppCompatActivity implements AddressView {
     }
 
     @Override
-    public void onFailer(String msg) {
+    public void onMoSuccess(String result) {
+        Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onFailer(String msg) {
+        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
     }
 }

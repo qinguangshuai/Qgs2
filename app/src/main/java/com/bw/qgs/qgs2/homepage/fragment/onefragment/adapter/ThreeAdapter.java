@@ -1,6 +1,7 @@
 package com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.TwoAdapterBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -46,7 +48,8 @@ public class ThreeAdapter extends RecyclerView.Adapter<ThreeAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         TwoAdapterBean.ResultBean.MlssBean.CommodityListBeanXX commodityListBeanXX = list.get(i);
-        Picasso.with(mContext).load(commodityListBeanXX.getMasterPic()).into(myViewHolder.image);
+        Uri uri = Uri.parse(commodityListBeanXX.getMasterPic());
+        myViewHolder.image.setImageURI(uri);
         myViewHolder.text.setText(commodityListBeanXX.getCommodityName());
         myViewHolder.text1.setText("$ "+commodityListBeanXX.getPrice());
     }
@@ -59,7 +62,7 @@ public class ThreeAdapter extends RecyclerView.Adapter<ThreeAdapter.MyViewHolder
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView text,text1;
-        ImageView image;
+        SimpleDraweeView image;
 
         public MyViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick) {
             super(itemView);

@@ -1,6 +1,7 @@
 package com.bw.qgs.qgs2.footer.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.footer.bean.FooterUser;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -44,7 +46,8 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         FooterUser.ResultBean bean = list.get(i);
-        Picasso.with(mContext).load(bean.getMasterPic()).into(myViewHolder.image);
+        Uri uri = Uri.parse(bean.getMasterPic());
+        myViewHolder.image.setImageURI(uri);
         myViewHolder.text.setText(bean.getCommodityName());
         long browseTime = bean.getBrowseTime();
         GregorianCalendar gc = new GregorianCalendar();
@@ -70,7 +73,7 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
+        SimpleDraweeView image;
         TextView text,text1;
 
         public MyViewHolder(@NonNull View itemView) {

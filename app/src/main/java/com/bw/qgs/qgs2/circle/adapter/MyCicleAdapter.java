@@ -1,6 +1,7 @@
 package com.bw.qgs.qgs2.circle.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.circle.bean.CicleUser;
 import com.bw.qgs.qgs2.footer.adapter.FooterAdapter;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -42,8 +44,10 @@ public class MyCicleAdapter extends RecyclerView.Adapter<MyCicleAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         CicleUser.ResultBean bean = list.get(i);
-        //Picasso.with(mContext).load(bean.getImage()).into(myViewHolder.image);
+        Uri uri = Uri.parse(bean.getHeadPic());
+        myViewHolder.image.setImageURI(uri);
         myViewHolder.text.setText(bean.getContent());
+        myViewHolder.creatcount.setText(bean.getGreatNum()+"");
     }
 
     @Override
@@ -53,12 +57,13 @@ public class MyCicleAdapter extends RecyclerView.Adapter<MyCicleAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView text;
-        ImageView image;
+        TextView text,creatcount;
+        SimpleDraweeView image;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             text = itemView.findViewById(R.id.circletextView);
+            creatcount = itemView.findViewById(R.id.creatcount);
             image = itemView.findViewById(R.id.circleimageView);
         }
     }

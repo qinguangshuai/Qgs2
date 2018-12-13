@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.circle.CircleActivity;
 import com.bw.qgs.qgs2.footer.FooterActivity;
 import com.bw.qgs.qgs2.myaddress.AddressActivity;
+import com.bw.qgs.qgs2.updataname.UpdataActivity;
 import com.bw.qgs.qgs2.wallet.WalletActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -83,6 +85,17 @@ public class FiveFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),CircleActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mypleasureimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

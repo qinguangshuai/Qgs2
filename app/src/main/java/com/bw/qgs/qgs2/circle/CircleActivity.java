@@ -42,7 +42,7 @@ public class CircleActivity extends AppCompatActivity implements MyCicleView {
         list = cicleUser.getResult();
         MyCicleAdapter myCicleAdapter = new MyCicleAdapter(getApplicationContext(),list);
         circlr.setAdapter(myCicleAdapter);
-        Toast.makeText(CircleActivity.this,result+"",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(CircleActivity.this,result+"",Toast.LENGTH_SHORT).show();
     }
 
     @Override

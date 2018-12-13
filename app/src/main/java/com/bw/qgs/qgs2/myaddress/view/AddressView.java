@@ -7,5 +7,6 @@ package com.bw.qgs.qgs2.myaddress.view;
  */
 public interface AddressView {
     void onSuccess(String result);
+    void onMoSuccess(String result);
     void onFailer(String msg);
 }

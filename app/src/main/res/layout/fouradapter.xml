@@ -8,7 +8,7 @@
     android:layout_width="242dp"
     android:layout_centerInParent="true"
     android:layout_height="242dp">
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/twoadapterimageView"
         android:layout_width="190dp"
         android:layout_height="190dp"

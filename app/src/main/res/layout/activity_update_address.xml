@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".xinzeng.UpdateAddressActivity">
+
+    <EditText
+        android:id="@+id/xinxiuedit5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="id"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/xinxiuedit1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="realName"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/xinxiuedit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="phone"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/xinxiuedit3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="address"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/xinxiuedit4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="zipCode"
+        android:padding="10dp"/>
+    <Button
+        android:id="@+id/xinxiubtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
