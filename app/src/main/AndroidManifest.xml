@@ -3,6 +3,9 @@
     package="com.bw.qgs.qgs2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".App"
@@ -28,10 +31,10 @@
         <activity android:name=".homepage.fragment.particulars.GoodsParticularsActivity" />
         <activity android:name=".myaddress.AddressActivity" />
         <activity android:name=".xinzeng.XinZengActivity" />
-        <activity android:name=".updataname.UpdataNameActivity" />
         <activity android:name=".updataname.UpdataActivity" />
         <activity android:name=".xinzeng.UpdateAddressActivity" />
-        <activity android:name=".updataname.UpdatePwdActivity"></activity>
+        <activity android:name=".updataname.UpdatePwdActivity" />
+        <activity android:name=".ding.DingActivity"></activity>
     </application>
 
 </manifest>

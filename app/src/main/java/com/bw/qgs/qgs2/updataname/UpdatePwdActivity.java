@@ -2,6 +2,7 @@ package com.bw.qgs.qgs2.updataname;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,6 +53,31 @@ public class UpdatePwdActivity extends AppCompatActivity implements UpdatePwdVie
 
     @Override
     public void onUpdatePwdFailer(String msg) {
+
+    }
+
+    float x1, x2;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        /*if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            x2 = event.getX();
+            if (x2 - x1 > 200) {
+                finish();
+            }
+        }*/
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            //当手指按下的时候
+            x1 = event.getX();
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            //当手指离开的时候
+            x2 = event.getX();
+            if (x2 - x1 > 100) {
+                finish();
+            }
+        }
+        return super.onTouchEvent(event);
 
     }
 }

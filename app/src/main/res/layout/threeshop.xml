@@ -4,41 +4,49 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:background="#d1cccc"
-    android:orientation="horizontal">
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/threesimple"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-        <TextView
-            android:id="@+id/threett1"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/allcheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/threesimple"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:text="111"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
             <TextView
-                android:id="@+id/threett2"
+                android:id="@+id/threett1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#f00"
+                android:textColor="#000"
                 android:text="111"/>
-            <com.bw.qgs.qgs2.custom.AddSub
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></com.bw.qgs.qgs2.custom.AddSub>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/threett2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#f00"
+                    android:text="111"/>
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
+    <com.bw.qgs.qgs2.custom.AddSub
+        android:id="@+id/addsub"
+        android:layout_width="180dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

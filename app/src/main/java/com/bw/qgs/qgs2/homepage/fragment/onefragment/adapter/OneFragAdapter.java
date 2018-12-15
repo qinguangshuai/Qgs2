@@ -48,6 +48,16 @@ public class OneFragAdapter extends RecyclerView.Adapter {
     private TwoAdapterBean.ResultBean list;
     private List<BannerUser.ResultBean> mResultBean;
     private HttpOnClick mHttpOnClick;
+    private HttpOnClick1 mHttpOnClick1;
+    private HttpOnClick2 mHttpOnClick2;
+
+    public void setHttpOnClick1(HttpOnClick1 httpOnClick1) {
+        mHttpOnClick1 = httpOnClick1;
+    }
+
+    public void setHttpOnClick2(HttpOnClick2 httpOnClick2) {
+        mHttpOnClick2 = httpOnClick2;
+    }
 
     public void setHttpOnClick(HttpOnClick httpOnClick) {
         mHttpOnClick = httpOnClick;
@@ -79,10 +89,10 @@ public class OneFragAdapter extends RecyclerView.Adapter {
             return new TwoViewHolder(view,mHttpOnClick);
         } else if (i == TYPE_THREE) {
             view = LayoutInflater.from(mContext).inflate(R.layout.three, viewGroup, false);
-            return new ThreeViewHolder(view,mHttpOnClick);
+            return new ThreeViewHolder(view,mHttpOnClick1);
         } else {
             view = LayoutInflater.from(mContext).inflate(R.layout.four, viewGroup, false);
-            return new FourViewHolder(view,mHttpOnClick);
+            return new FourViewHolder(view,mHttpOnClick2);
         }
     }
 
@@ -263,7 +273,7 @@ public class OneFragAdapter extends RecyclerView.Adapter {
         TextView text3;
         RecyclerView recycle3;
 
-        public ThreeViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick) {
+        public ThreeViewHolder(@NonNull View itemView, final HttpOnClick1 httpOnClick) {
             super(itemView);
             text3 = itemView.findViewById(R.id.threetextView);
             recycle3 = itemView.findViewById(R.id.threerecycle);
@@ -281,7 +291,7 @@ public class OneFragAdapter extends RecyclerView.Adapter {
         TextView text4;
         RecyclerView recycle4;
 
-        public FourViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick) {
+        public FourViewHolder(@NonNull View itemView, final HttpOnClick2 httpOnClick) {
             super(itemView);
             text4 = itemView.findViewById(R.id.fourtextView);
             recycle4 = itemView.findViewById(R.id.threerecycle);
@@ -294,6 +304,14 @@ public class OneFragAdapter extends RecyclerView.Adapter {
         }
     }
     public interface HttpOnClick{
+        void click(View view,int position);
+    }
+
+    public interface HttpOnClick1{
+        void click(View view,int position);
+    }
+
+    public interface HttpOnClick2{
         void click(View view,int position);
     }
 }

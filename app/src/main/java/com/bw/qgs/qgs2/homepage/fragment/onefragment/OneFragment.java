@@ -179,7 +179,26 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
             public void click(View view, int position) {
                 recycleone2.setVisibility(View.VISIBLE);
                 recycleone1.setVisibility(View.GONE);
-                mOneDianPresenter.dian(UrlUtil.ONETIAO+(resultBeans.getRxxp().get(0).getId()+1));
+                int id = resultBeans.getRxxp().get(0).getId();
+                mOneDianPresenter.dian(UrlUtil.ONETIAO+id);
+            }
+        });
+        mOneFragAdapter.setHttpOnClick1(new OneFragAdapter.HttpOnClick1() {
+            @Override
+            public void click(View view, int position) {
+                recycleone2.setVisibility(View.VISIBLE);
+                recycleone1.setVisibility(View.GONE);
+                int id = resultBeans.getMlss().get(0).getId();
+                mOneDianPresenter.dian(UrlUtil.ONETIAO+id);
+            }
+        });
+        mOneFragAdapter.setHttpOnClick2(new OneFragAdapter.HttpOnClick2() {
+            @Override
+            public void click(View view, int position) {
+                recycleone2.setVisibility(View.VISIBLE);
+                recycleone1.setVisibility(View.GONE);
+                int id = resultBeans.getPzsh().get(0).getId();
+                mOneDianPresenter.dian(UrlUtil.ONETIAO+id);
             }
         });
         onefragmentrecycle.setAdapter(mOneFragAdapter);
@@ -221,7 +240,7 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
                 mOneDianPresenter.dian(UrlUtil.ONETIAO+commodityId);
                 Intent intent = new Intent(getActivity(),GoodsParticularsActivity.class);
                 Toast.makeText(getActivity(),commodityId+"",Toast.LENGTH_SHORT).show();
-                intent.putExtra("id",commodityId+"");
+                intent.putExtra("id",commodityId);
                 startActivity(intent);
             }
         });

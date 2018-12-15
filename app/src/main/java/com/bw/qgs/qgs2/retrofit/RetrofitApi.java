@@ -1,11 +1,15 @@
 package com.bw.qgs.qgs2.retrofit;
 
+import java.io.File;
+
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
@@ -19,11 +23,22 @@ public interface RetrofitApi {
     Call<String> getMethod(@Url String url);
 
     @POST
+    @FormUrlEncoded
     Call<String> postMethod(@Url String url);
 
     @POST
     @FormUrlEncoded
     Call<String> postZanMethod(@Url String url, @Field("circleId") int circleId);
+
+    @POST
+    @FormUrlEncoded
+    Call<String> postHeadMethod(@Url String url, @Field("image") File image);
+
+    @DELETE
+    Call<String> postCancleZanMethod(@Url String url, @Query("circleId") int circleId);
+
+    @DELETE
+    Call<String> deleteCicleZanMethod(@Url String url, @Query("circleId") int circleId);
 
     @PUT
     @FormUrlEncoded
@@ -40,4 +55,8 @@ public interface RetrofitApi {
     @PUT
     @FormUrlEncoded
     Call<String> putShopMethod(@Url String url,@Field("data") String data);
+
+    @POST
+    @FormUrlEncoded
+    Call<String> postMoMethod(@Url String url, @Field("id") int id);
 }

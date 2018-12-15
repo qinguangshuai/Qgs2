@@ -13,15 +13,19 @@ public interface UrlUtil {
     public String REGIN1 = "http://172.17.8.100/small/user/v1/register?phone=";
     public String REGIN2 = "&&pwd=";
     public String ONE = "http://172.17.8.100/small/commodity/v1/commodityList";
+    //http://172.17.8.100/small/commodity/v1/findCommodityDetailsById
+    //http://172.17.8.100/small/commodity/v1/findCommodityDetailsById
     public String ONETIAO = "http://172.17.8.100/small/commodity/v1/findCommodityListByLabel?page=1&count=8&labelId=";
     public String CICLE = "http://172.17.8.100/small/circle/v1/findCircleList?page=1&count=99";
     public String WALLET = "http://172.17.8.100/small/user/verify/v1/findUserWallet?page=1&count=0";
+    //http://172.17.8.100/small/commodity/v1/findCommodityListByLabel
+    //http://172.17.8.100/small/commodity/v1/findCommodityDetailsById
     public String BANNER = "http://172.17.8.100/small/commodity/v1/bannerShow";
     public String FOOTER = "http://172.17.8.100/small/commodity/verify/v1/browseList?page=1&count=99";
     public String MYCIRCLE = "http://172.17.8.100/small/circle/verify/v1/findMyCircleById?page=1&count=5";
-    //  商品详情
+    //  商品详情http://172.17.8.100/small/commodity/v1/findCommodityDetailsById
     public String GOODSPARTICU = "http://172.17.8.100/small/commodity/v1/findCommodityDetailsById?commodityId=";
-    //查询
+    //查询http://172.17.8.100/small/commodity/v1/findCommodityDetailsById
     public String QUERY = "http://172.17.8.100/small/commodity/v1/findCommodityByKeyword?page=1&count=99&keyword=";
     public String ADDRESS = "http://172.17.8.100/small/user/verify/v1/receiveAddressList";
     public String YIJI = "http://172.17.8.100/small/commodity/v1/findFirstCategory";
@@ -36,6 +40,8 @@ public interface UrlUtil {
     public String UPDATANAME = "modifyUserNick?nickName=";
     //点赞
     public String ZAN = "small/circle/verify/v1/addCircleGreat";
+    //取消点赞http://172.17.8.100/small/circle/verify/v1/cancelCircleGreat
+    public String CANCLEZAN = "small/circle/verify/v1/cancelCircleGreat";
     //修改昵称http://172.17.8.100/small/user/verify/v1/modifyUserNick
     public String NAME = "small/user/verify/v1/modifyUserNick";
     //修改收货信息http://172.17.8.100/small/user/verify/v1/changeReceiveAddress
@@ -46,4 +52,10 @@ public interface UrlUtil {
     public String SHOPCAR = "small/order/verify/v1/syncShoppingCart";
     //购物车http://172.17.8.100/small/order/verify/v1/findShoppingCart
     public String THREESHOPCAR= "small/order/verify/v1/findShoppingCart";
+    //删除http://172.17.8.100/small/circle/verify/v1/deleteCircle
+    public String DELETECICLE = "small/circle/verify/v1/deleteCircle";
+    //上传头像http://172.17.8.100/small/user/verify/v1/modifyHeadPic
+    public String HEAD = "small/user/verify/v1/modifyHeadPic";
+    //默认收货地址http://172.17.8.100/small/user/verify/v1/setDefaultReceiveAddress
+    public String MORENADDRESS = "small/user/verify/v1/setDefaultReceiveAddress";
 }

@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.circle.bean.CicleUser;
@@ -37,17 +39,36 @@ public class MyCicleAdapter extends RecyclerView.Adapter<MyCicleAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.circle, viewGroup, false);
-        MyViewHolder holder = new MyViewHolder(view);
+        MyViewHolder holder = new MyViewHolder(view,mHttpDelete);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        CicleUser.ResultBean bean = list.get(i);
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
+        final CicleUser.ResultBean bean = list.get(i);
         Uri uri = Uri.parse(bean.getHeadPic());
         myViewHolder.image.setImageURI(uri);
         myViewHolder.text.setText(bean.getContent());
         myViewHolder.creatcount.setText(bean.getGreatNum()+"");
+        /*myViewHolder.deletecicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bean!=null){
+                    list.remove(i);
+                    notifyItemRemoved(i);
+                    notifyDataSetChanged();
+                }else{
+                    Toast.makeText(mContext,"11111",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
+        myViewHolder.deleterb.clearAnimation();
+    }
+
+    public void removeId(int position){
+        list.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -59,12 +80,32 @@ public class MyCicleAdapter extends RecyclerView.Adapter<MyCicleAdapter.MyViewHo
 
         TextView text,creatcount;
         SimpleDraweeView image;
+        ImageView deletecicle;
+        RadioButton deleterb;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, final HttpDelete httpDelete) {
             super(itemView);
             text = itemView.findViewById(R.id.circletextView);
             creatcount = itemView.findViewById(R.id.creatcount);
             image = itemView.findViewById(R.id.circleimageView);
+            deletecicle = itemView.findViewById(R.id.deletecicle);
+            deleterb = itemView.findViewById(R.id.deleterb);
+            deleterb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    httpDelete.getDelete(getAdapterPosition());
+                }
+            });
         }
+    }
+
+    private HttpDelete mHttpDelete;
+
+    public void setHttpDelete(HttpDelete httpDelete) {
+        mHttpDelete = httpDelete;
+    }
+
+    public interface HttpDelete{
+        void getDelete(int position);
     }
 }

@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.bw.qgs.qgs2.okhttp.OkHttpUtil;
 
+import java.io.File;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +38,23 @@ public class HttpManager {
     public void postZanMethod(String url, int circleId, final CallBack callBack){
         RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
         Call<String> call = retrofitApi.postZanMethod(url,circleId);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String s = response.body();
+                callBack.onRetrofitSuccess(s);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onRetrofitFailer("失败");
+            }
+        });
+    }
+
+    public void postCancleZanMethod(String url, int circleId, final CallBack callBack){
+        RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
+        Call<String> call = retrofitApi.postCancleZanMethod(url,circleId);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -104,6 +123,57 @@ public class HttpManager {
     public void putShopMethod(String url,String data, final CallBack callBack){
         RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
         Call<String> call = retrofitApi.putShopMethod(url,data);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String s = response.body();
+                callBack.onRetrofitSuccess(s);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onRetrofitFailer("失败");
+            }
+        });
+    }
+
+    public void deleteCicleMethod(String url, int circleId, final CallBack callBack){
+        RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
+        Call<String> call = retrofitApi.deleteCicleZanMethod(url,circleId);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String s = response.body();
+                callBack.onRetrofitSuccess(s);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onRetrofitFailer("失败");
+            }
+        });
+    }
+
+    public void postHeadMethod(String url, File image, final CallBack callBack){
+        RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
+        Call<String> call = retrofitApi.postHeadMethod(url,image);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String s = response.body();
+                callBack.onRetrofitSuccess(s);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onRetrofitFailer("失败");
+            }
+        });
+    }
+
+    public void postMoMethod(String url, int id, final CallBack callBack){
+        RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
+        Call<String> call = retrofitApi.postMoMethod(url,id);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

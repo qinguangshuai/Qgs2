@@ -7,9 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.custom.AddSub;
 import com.bw.qgs.qgs2.homepage.fragment.threefragment.user.ThreeFragmentUser;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -24,6 +26,15 @@ public class ThreeFragmentAdapter extends RecyclerView.Adapter<ThreeFragmentAdap
 
     private Context mContext;
     private List<ThreeFragmentUser.ResultBean> mResult1;
+    private AddSub.OnNumChangedListener mOnNumChangedListener;
+
+    public List<ThreeFragmentUser.ResultBean> getResult1() {
+        return mResult1;
+    }
+
+    public void setOnNumChangedListener(AddSub.OnNumChangedListener onNumChangedListener) {
+        mOnNumChangedListener = onNumChangedListener;
+    }
 
     public ThreeFragmentAdapter(Context context, List<ThreeFragmentUser.ResultBean> result1) {
         mContext = context;
@@ -34,17 +45,27 @@ public class ThreeFragmentAdapter extends RecyclerView.Adapter<ThreeFragmentAdap
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.threeshop, viewGroup, false);
-        MyViewHolder holder = new MyViewHolder(view);
+        MyViewHolder holder = new MyViewHolder(view,mCheckDan);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        ThreeFragmentUser.ResultBean bean = mResult1.get(i);
+        final ThreeFragmentUser.ResultBean bean = mResult1.get(i);
         Uri uri = Uri.parse(bean.getPic());
         myViewHolder.threesimple.setImageURI(uri);
         myViewHolder.threett1.setText(bean.getCommodityName());
-        myViewHolder.threett2.setText(bean.getPrice()+"");
+        myViewHolder.threett2.setText(bean.getPrice() + "");
+        myViewHolder.allcheckbox.setChecked(bean.isChecked());
+        myViewHolder.addsub.setOnNumChangedListener(new AddSub.OnNumChangedListener() {
+            @Override
+            public void onNumChange(View view, int curNum) {
+                bean.setCount(curNum);
+                if (mOnNumChangedListener != null) {
+                    mOnNumChangedListener.onNumChange(view, curNum);
+                }
+            }
+        });
     }
 
     @Override
@@ -52,16 +73,36 @@ public class ThreeFragmentAdapter extends RecyclerView.Adapter<ThreeFragmentAdap
         return mResult1.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         SimpleDraweeView threesimple;
-        TextView threett1,threett2;
+        TextView threett1, threett2;
+        AddSub addsub;
+        CheckBox allcheckbox;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, final checkDan checkDan) {
             super(itemView);
             threesimple = itemView.findViewById(R.id.threesimple);
             threett1 = itemView.findViewById(R.id.threett1);
             threett2 = itemView.findViewById(R.id.threett2);
+            addsub = itemView.findViewById(R.id.addsub);
+            allcheckbox = itemView.findViewById(R.id.allcheckbox);
+            allcheckbox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkDan.getId(getAdapterPosition());
+                }
+            });
         }
+    }
+
+    private checkDan mCheckDan;
+
+    public void setCheckDan(checkDan checkDan) {
+        mCheckDan = checkDan;
+    }
+
+    public interface checkDan{
+        void getId(int position);
     }
 }

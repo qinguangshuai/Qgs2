@@ -7,5 +7,6 @@ package com.bw.qgs.qgs2.circle.view;
  */
 public interface MyCicleView {
     void onCicleCuccess(String result);
+    void onDeleteCicleCuccess(String result);
     void onCicleFailer(String msg);
 }

@@ -74,15 +74,8 @@
             android:id="@+id/priseimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/common_btn_prise_n_xhdpi"/>
-        <TextView
-            android:id="@+id/prisetext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="15dp"/>
+           />
+        <!--android:background="@drawable/common_btn_prise_n_xhdpi"-->
     </LinearLayout>
     <!--<com.bw.qgs.qgs2.homepage.fragment.twofragment.ady.Add
         android:layout_width="match_parent"

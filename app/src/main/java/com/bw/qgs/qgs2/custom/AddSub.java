@@ -18,6 +18,11 @@ public class AddSub extends LinearLayout {
 
     private View view;
     private TextView sub,num,add;
+    private OnNumChangedListener mOnNumChangedListener;
+
+    public void setOnNumChangedListener(OnNumChangedListener onNumChangedListener) {
+        mOnNumChangedListener = onNumChangedListener;
+    }
 
     public AddSub(Context context) {
         this(context,null);
@@ -38,7 +43,7 @@ public class AddSub extends LinearLayout {
         String s = num.getText().toString();
         int anInt = Integer.parseInt(s);
         anInt++;
-        num.setText(anInt+"");
+        setCurrentCount(anInt);
     }
 
     public void jian(){
@@ -46,7 +51,7 @@ public class AddSub extends LinearLayout {
         int anInt = Integer.parseInt(s);
         if(anInt>1){
             anInt--;
-            num.setText(anInt+"");
+            setCurrentCount(anInt);
         }else{
             Toast.makeText(getContext(),"最后一条了",Toast.LENGTH_SHORT).show();
         }
@@ -77,5 +82,16 @@ public class AddSub extends LinearLayout {
         num = view.findViewById(R.id.num);
         add = view.findViewById(R.id.add);
         num.setText("1");
+    }
+
+    public void setCurrentCount(int number){
+        num.setText(number+"");
+        if (mOnNumChangedListener != null){
+            mOnNumChangedListener.onNumChange(this,number);
+        }
+    }
+
+    public interface OnNumChangedListener{
+        void onNumChange(View view,int curNum);
     }
 }

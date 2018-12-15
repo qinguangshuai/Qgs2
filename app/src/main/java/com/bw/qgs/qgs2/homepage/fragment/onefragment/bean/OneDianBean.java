@@ -55,7 +55,7 @@ public class OneDianBean {
         private int commodityId;
         private String commodityName;
         private String masterPic;
-        private int price;
+        private double price;
         private int saleNum;
 
         public int getCommodityId() {
@@ -82,11 +82,11 @@ public class OneDianBean {
             this.masterPic = masterPic;
         }
 
-        public int getPrice() {
+        public double getPrice() {
             return price;
         }
 
-        public void setPrice(int price) {
+        public void setPrice(double price) {
             this.price = price;
         }
 

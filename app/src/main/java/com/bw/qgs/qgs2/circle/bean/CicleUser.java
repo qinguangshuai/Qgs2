@@ -65,6 +65,15 @@ public class CicleUser {
         private String image;
         private String nickName;
         private int userId;
+        private boolean isChecked = false;
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
+        }
 
         public int getCommodityId() {
             return commodityId;

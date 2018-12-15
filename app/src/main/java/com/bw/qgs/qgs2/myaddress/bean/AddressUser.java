@@ -63,6 +63,15 @@ public class AddressUser {
         private int userId;
         private int whetherDefault;
         private String zipCode;
+        private boolean ischeck = false;
+
+        public boolean isIscheck() {
+            return ischeck;
+        }
+
+        public void setIscheck(boolean ischeck) {
+            this.ischeck = ischeck;
+        }
 
         public String getAddress() {
             return address;

@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.bw.qgs.qgs2.Contexton;
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.custom.AddSub;
 import com.bw.qgs.qgs2.homepage.fragment.particulars.bean.ChuanZhiBean;
 import com.bw.qgs.qgs2.homepage.fragment.threefragment.adapter.ThreeFragmentAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.threefragment.presenter.ThreeFragmentPresenter;
@@ -45,20 +47,48 @@ public class ThreeFragment extends Fragment implements ThreeFragmentView {
     Unbinder unbinder;
     private ThreeFragmentPresenter mThreeFragmentPresenter;
     private List<ThreeFragmentUser.ResultBean> mResult1;
+    private ThreeFragmentAdapter mThreeFragmentAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_three, container, false);
-        unbinder = ButterKnife.bind(this, view);
         mThreeFragmentPresenter = new ThreeFragmentPresenter(this);
         mThreeFragmentPresenter.threeshop(UrlUtil.THREESHOPCAR);
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-
+        unbinder = ButterKnife.bind(this, view);
+        threecheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setCheckAll();
+                getTotal();
+            }
+        });
         return view;
+    }
+
+    public void getTotal(){
+        int total = 0;
+        List<ThreeFragmentUser.ResultBean> result1 = mThreeFragmentAdapter.getResult1();
+        for (int i = 0;i<result1.size();i++){
+            boolean checked = result1.get(i).isChecked();
+            if(checked){
+                double price = result1.get(i).getPrice();
+                total+=price*result1.get(i).getCount();
+            }
+        }
+        threetextmoney.setText("$"+total);
+    }
+
+    public void setCheckAll(){
+        List<ThreeFragmentUser.ResultBean> result1 = mThreeFragmentAdapter.getResult1();
+        for (int i = 0;i<result1.size();i++){
+            result1.get(i).setChecked(threecheck.isChecked());
+        }
+        mThreeFragmentAdapter.notifyDataSetChanged();
     }
 
     @Subscribe
@@ -82,13 +112,36 @@ public class ThreeFragment extends Fragment implements ThreeFragmentView {
         Gson gson = new Gson();
         ThreeFragmentUser threeFragmentUser = gson.fromJson(result, ThreeFragmentUser.class);
         mResult1 = threeFragmentUser.getResult();
-        ThreeFragmentAdapter threeFragmentAdapter = new ThreeFragmentAdapter(getActivity(), mResult1);
-        threerecycle.setAdapter(threeFragmentAdapter);
+        mThreeFragmentAdapter = new ThreeFragmentAdapter(getActivity(), mResult1);
+        mThreeFragmentAdapter.setCheckDan(new ThreeFragmentAdapter.checkDan() {
+            @Override
+            public void getId(int position) {
+                boolean checked = mResult1.get(position).isChecked();
+                if (checked){
+                    mResult1.get(position).setChecked(false);
+                    getTotal();
+                }else{
+                    mResult1.get(position).setChecked(true);
+                    getTotal();
+                }
+            }
+        });
+        threerecycle.setAdapter(mThreeFragmentAdapter);
+        initShopCartChange();
     }
 
     @Override
     public void onThreeFailer(String msg) {
 
+    }
+
+    private void initShopCartChange(){
+        mThreeFragmentAdapter.setOnNumChangedListener(new AddSub.OnNumChangedListener() {
+            @Override
+            public void onNumChange(View view, int curNum) {
+                getTotal();
+            }
+        });
     }
 
     @Override
@@ -97,13 +150,8 @@ public class ThreeFragment extends Fragment implements ThreeFragmentView {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.threecheck, R.id.threecheckbtn})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.threecheck:
-                break;
-            case R.id.threecheckbtn:
-                break;
-        }
+    @OnClick(R.id.threecheckbtn)
+    public void onViewClicked() {
+        
     }
 }

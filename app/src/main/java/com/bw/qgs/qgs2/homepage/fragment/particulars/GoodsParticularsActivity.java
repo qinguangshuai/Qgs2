@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.qgs.qgs2.Contexton;
@@ -31,18 +32,26 @@ public class GoodsParticularsActivity extends AppCompatActivity implements Goods
     private RecyclerView recycle;
     private GoodsParticularsAdapter mGoodsParticularsAdapter;
     private ShopPresenter mShopPresenter;
+    private TextView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_particulars);
         recycle = findViewById(R.id.goodspartrecycle);
+        back = findViewById(R.id.back);
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
+        int id = intent.getIntExtra("id",-1);
         mGoodsParticularsPresenter = new GoodsParticularsPresenter(this);
         mGoodsParticularsPresenter.par(UrlUtil.GOODSPARTICU+id);
         mGoodsParticularsAdapter = new GoodsParticularsAdapter(getApplicationContext(),null);
         mShopPresenter = new ShopPresenter(this);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -56,7 +65,7 @@ public class GoodsParticularsActivity extends AppCompatActivity implements Goods
                 //同步购物车
                 ShopUser shopUser = new ShopUser();
                 shopUser.setCommodityId(resultBean.getCommodityId());
-                shopUser.setCount(5);
+                shopUser.setCount(1);
                 List<ShopUser> list = new ArrayList<>();
                 list.add(shopUser);
                 Gson gson = new Gson();

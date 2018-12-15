@@ -3,11 +3,13 @@ package com.bw.qgs.qgs2.xinzeng;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.myaddress.AddressActivity;
 import com.bw.qgs.qgs2.url.UrlUtil;
 import com.bw.qgs.qgs2.xinzeng.bean.XiuAddUser;
 import com.bw.qgs.qgs2.xinzeng.presenter.UpdateAddressPresenter;
@@ -61,7 +63,15 @@ public class UpdateAddressActivity extends AppCompatActivity implements UpdateAd
         String string4 = xinxiuedit4.getText().toString();
         String string5 = xinxiuedit5.getText().toString();
         int anInt = Integer.parseInt(string5);
+        xinxiuedit1.setText(string1);
+        xinxiuedit2.setText(string2);
+        xinxiuedit3.setText(string3);
+        xinxiuedit4.setText(string4);
+        xinxiuedit5.setText(anInt+"");
         mUpdateAddressPresenter.addresspre(UrlUtil.UPDATAADDRESS,anInt,string1,string2,string3,string4);
+        Intent intent = new Intent(UpdateAddressActivity.this,AddressActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -74,6 +84,31 @@ public class UpdateAddressActivity extends AppCompatActivity implements UpdateAd
 
     @Override
     public void onUpAddFailer(String msg) {
+
+    }
+
+    float x1, x2;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            x2 = event.getX();
+            if (x2 - x1 > 200) {
+                finish();
+            }
+        }
+        /*if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            //当手指按下的时候
+            x1 = event.getX();
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            //当手指离开的时候
+            x2 = event.getX();
+            if (x2 - x1 > 100) {
+                finish();
+            }
+        }*/
+        return super.onTouchEvent(event);
 
     }
 }

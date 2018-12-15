@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,14 +14,10 @@ import android.widget.Toast;
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.myaddress.adapter.AddressAdapter;
 import com.bw.qgs.qgs2.myaddress.bean.AddressUser;
+import com.bw.qgs.qgs2.myaddress.bean.MoRenUser;
 import com.bw.qgs.qgs2.myaddress.presenter.AddressPresenter;
-import com.bw.qgs.qgs2.myaddress.presenter.MoPresenter;
 import com.bw.qgs.qgs2.myaddress.view.AddressView;
-import com.bw.qgs.qgs2.url.BaseRequest;
 import com.bw.qgs.qgs2.url.UrlUtil;
-import com.bw.qgs.qgs2.wallet.WalletActivity;
-import com.bw.qgs.qgs2.wallet.adapter.WalletAdapter;
-import com.bw.qgs.qgs2.wallet.bean.WalletUser;
 import com.bw.qgs.qgs2.xinzeng.UpdateAddressActivity;
 import com.bw.qgs.qgs2.xinzeng.XinZengActivity;
 import com.google.gson.Gson;
@@ -41,7 +38,7 @@ public class AddressActivity extends AppCompatActivity implements AddressView {
     Button insertaddress;
     private AddressPresenter mAddressPresenter;
     private List<AddressUser.ResultBean> mResult1;
-    private MoPresenter mMoPresenter;
+    private MoAddressPresenter mMoAddressPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,7 @@ public class AddressActivity extends AppCompatActivity implements AddressView {
         ButterKnife.bind(this);
         mAddressPresenter = new AddressPresenter(this);
         mAddressPresenter.addre(UrlUtil.ADDRESS);
-        mMoPresenter = new MoPresenter(this);
+        mMoAddressPresenter = new MoAddressPresenter(this);
     }
 
     @OnClick({R.id.finishaddress, R.id.insertaddress})
@@ -101,17 +98,59 @@ public class AddressActivity extends AppCompatActivity implements AddressView {
                 startActivity(intent);
             }
         });
+        walletAdapter.setHttpCheckOnClick(new AddressAdapter.HttpCheckOnClick() {
+            @Override
+            public void click(View view, int position) {
+                int id = mResult1.get(position).getId();
+                boolean ischeck = mResult1.get(position).isIscheck();
+                if (ischeck){
+                    Toast.makeText(getApplicationContext(),"失败",Toast.LENGTH_SHORT).show();
+                }else{
+                    mMoAddressPresenter.mo(UrlUtil.MORENADDRESS,id);
+                    mResult1.get(position).setIscheck(true);
+                }
+            }
+        });
         addressrecycle.setAdapter(walletAdapter);
+        walletAdapter.notifyDataSetChanged();
         //Toast.makeText(getApplicationContext(), "" + mResult1, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onMoSuccess(String result) {
-        Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+        Gson gson = new Gson();
+        MoRenUser moRenUser = gson.fromJson(result, MoRenUser.class);
+        String message = moRenUser.getMessage();
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFailer(String msg) {
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+    }
+
+    float x1, x2;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            x2 = event.getX();
+            if (x2 - x1 > 200) {
+                finish();
+            }
+        }
+        /*if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            //当手指按下的时候
+            x1 = event.getX();
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            //当手指离开的时候
+            x2 = event.getX();
+            if (x2 - x1 > 100) {
+                finish();
+            }
+        }*/
+        return super.onTouchEvent(event);
+
     }
 }

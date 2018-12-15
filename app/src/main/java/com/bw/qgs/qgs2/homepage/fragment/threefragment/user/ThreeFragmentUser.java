@@ -56,7 +56,16 @@ public class ThreeFragmentUser {
         private String commodityName;
         private int count;
         private String pic;
-        private int price;
+        private double price;
+        private boolean isChecked = false;
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
+        }
 
         public int getCommodityId() {
             return commodityId;
@@ -90,7 +99,7 @@ public class ThreeFragmentUser {
             this.pic = pic;
         }
 
-        public int getPrice() {
+        public double getPrice() {
             return price;
         }
 

@@ -29,6 +29,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
     private List<AddressUser.ResultBean> mResult1;
     private HttpOnClick mHttpOnClick;
     private HttpXiuOnClick mHttpXiuOnClick;
+    private HttpCheckOnClick mHttpCheckOnClick;
+
+    public void setHttpCheckOnClick(HttpCheckOnClick httpCheckOnClick) {
+        mHttpCheckOnClick = httpCheckOnClick;
+    }
 
     public void setHttpXiuOnClick(HttpXiuOnClick httpXiuOnClick) {
         mHttpXiuOnClick = httpXiuOnClick;
@@ -47,7 +52,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.address, viewGroup, false);
-        MyViewHolder holder = new MyViewHolder(view,mHttpOnClick,mHttpXiuOnClick);
+        MyViewHolder holder = new MyViewHolder(view,mHttpOnClick,mHttpXiuOnClick,mHttpCheckOnClick);
         return holder;
     }
 
@@ -77,16 +82,16 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
                 mHttpOnClick.click(v,bean.getId());
             }
         });*/
-        myViewHolder.addressbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     public void removeId(int position){
         mResult1.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+    }
+
+    public void insert(int position){
+        mResult1.add(position,mResult1.get(position));
         notifyItemRemoved(position);
         notifyDataSetChanged();
     }
@@ -102,7 +107,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
         Button addressbtn2,addressbtn1;
         CheckBox addressbox;
 
-        public MyViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick, final HttpXiuOnClick httpXiuOnClick) {
+        public MyViewHolder(@NonNull View itemView, final HttpOnClick httpOnClick, final HttpXiuOnClick httpXiuOnClick, final HttpCheckOnClick httpCheckOnClick) {
             super(itemView);
             addresstext1 = itemView.findViewById(R.id.addresstext1);
             addresstext2 = itemView.findViewById(R.id.addresstext2);
@@ -111,7 +116,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
             addressbtn2 = itemView.findViewById(R.id.addressbtn2);
             addressbtn1 = itemView.findViewById(R.id.addressbtn1);
             addressbox = itemView.findViewById(R.id.addressbox);
-            addressbtn1.setOnClickListener(new View.OnClickListener() {
+            addressbtn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     httpOnClick.click(v,getAdapterPosition());
@@ -123,6 +128,12 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
                     httpXiuOnClick.click(v,getAdapterPosition());
                 }
             });
+            addressbox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    httpCheckOnClick.click(v,getAdapterPosition());
+                }
+            });
         }
     }
 
@@ -131,6 +142,10 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
     }
 
     public interface HttpXiuOnClick{
+        void click(View view,int position);
+    }
+
+    public interface HttpCheckOnClick{
         void click(View view,int position);
     }
 }
