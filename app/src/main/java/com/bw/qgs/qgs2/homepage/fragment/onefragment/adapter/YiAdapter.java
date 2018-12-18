@@ -25,16 +25,20 @@ import java.util.List;
 public class YiAdapter extends RecyclerView.Adapter<YiAdapter.TwoViewHolder> {
 
     private Context mContext;
-    private List<YiJi.ResultBean> mResult1;
+    private List<YiJi.ResultBean> mResult11;
     private HttpClick click;
 
     public void setClick(HttpClick click) {
         this.click = click;
     }
 
-    public YiAdapter(Context context, List<YiJi.ResultBean> result1) {
+    public YiAdapter(Context context, List<YiJi.ResultBean> result11) {
         mContext = context;
-        mResult1 = result1;
+        mResult11 = result11;
+    }
+
+    public void setResult11(List<YiJi.ResultBean> result11) {
+        mResult11 = result11;
     }
 
     @NonNull
@@ -47,13 +51,13 @@ public class YiAdapter extends RecyclerView.Adapter<YiAdapter.TwoViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TwoViewHolder twoViewHolder, int i) {
-        YiJi.ResultBean bean = mResult1.get(i);
+        YiJi.ResultBean bean = mResult11.get(i);
         twoViewHolder.text1.setText(bean.getName());
     }
 
     @Override
     public int getItemCount() {
-        return mResult1.size();
+        return mResult11.size();
     }
 
     class TwoViewHolder extends RecyclerView.ViewHolder{
@@ -63,7 +67,7 @@ public class YiAdapter extends RecyclerView.Adapter<YiAdapter.TwoViewHolder> {
         public TwoViewHolder(@NonNull View itemView, final HttpClick click) {
             super(itemView);
             text1 = itemView.findViewById(R.id.yitextView);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            text1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     click.click(v,getAdapterPosition());

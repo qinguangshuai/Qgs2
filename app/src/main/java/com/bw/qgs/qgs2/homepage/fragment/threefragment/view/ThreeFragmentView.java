@@ -7,5 +7,6 @@ package com.bw.qgs.qgs2.homepage.fragment.threefragment.view;
  */
 public interface ThreeFragmentView {
     void onThreeSuccess(String result);
+    void onDingSuccess(String result);
     void onThreeFailer(String msg);
 }

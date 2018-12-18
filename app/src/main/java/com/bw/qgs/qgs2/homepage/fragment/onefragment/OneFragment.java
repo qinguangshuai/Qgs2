@@ -2,6 +2,7 @@ package com.bw.qgs.qgs2.homepage.fragment.onefragment;
 
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,10 +10,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -20,18 +23,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.qgs.qgs2.R;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.ErAdapter;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.ErXiangAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.OneDianAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.OneFragAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.QueryAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.QueryGoodsAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.adapter.YiAdapter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.BannerUser;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.ErJi;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.ErXiangUser;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.OneDianBean;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.QueryGoods;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.QueryUser;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.TwoAdapterBean;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.bean.YiJi;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.BannerPresenter;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.ErPresenter;
+import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.ErXiangPresenter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.OneDianPresenter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.OneFragmentOnePresenter;
 import com.bw.qgs.qgs2.homepage.fragment.onefragment.presenter.QueryPresenter;
@@ -57,7 +66,7 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
     @BindView(R.id.righticon)
     TextView righticon;
     Unbinder unbinder;
-    private XRecyclerView onefragmentrecycle,onefragmentrecycle1,twofragmentrecycle1;
+    private XRecyclerView onefragmentrecycle,onefragmentrecycle1,twofragmentrecycle1,threefragmentrecycle1;
     private OneFragmentOnePresenter mOneFragmentOnePresenter;
     private OneFragAdapter mOneFragAdapter;
     private PopupWindow pop;
@@ -71,9 +80,13 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
     private EditText queryedit;
     private List<QueryUser.ResultBean> mResultBeans;
     private QueryPresenter mQueryPresenter;
-    private RecyclerView pop1recycle;
-    private List<YiJi.ResultBean> mResult1;
+    private RecyclerView erjirecycle,yijirecycle;
     private YiPresenter mYiPresenter;
+    private List<YiJi.ResultBean> mResult11;
+    private List<ErJi.ResultBean> mJiResult;
+    private ErPresenter mErPresenter;
+    private List<ErXiangUser.ResultBean> mResult1;
+    private ErXiangPresenter mErXiangPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,6 +128,7 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
         onefragmentrecycle = view.findViewById(R.id.onefragmentrecycle);
         onefragmentrecycle1 = view.findViewById(R.id.onefragmentrecycle1);
         twofragmentrecycle1 = view.findViewById(R.id.twofragmentrecycle1);
+        threefragmentrecycle1 = view.findViewById(R.id.threefragmentrecycle1);
         recycleone2 = view.findViewById(R.id.recycleone2);
         recycleone1 = view.findViewById(R.id.recycleone1);
         lefticon1 = view.findViewById(R.id.lefticon1);
@@ -154,6 +168,8 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
         mOneDianPresenter = new OneDianPresenter(this);
         mQueryPresenter = new QueryPresenter(this);
         mYiPresenter = new YiPresenter(this);
+        mErPresenter = new ErPresenter(this);
+        mErXiangPresenter = new ErXiangPresenter(this);
     }
 
     Handler mHandler = new Handler() {
@@ -265,14 +281,62 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
     }
 
     @Override
-    public void onJiSuccess(String result) {
-        /*GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),1);
-        pop1recycle.setLayoutManager(gridLayoutManager);
+    public void onyiSuccess(String result) {
         Gson gson = new Gson();
         YiJi yiJi = gson.fromJson(result, YiJi.class);
-        mResult1 = yiJi.getResult();
-        YiAdapter yiAdapter = new YiAdapter(getActivity(),mResult1);
-        pop1recycle.setAdapter(yiAdapter);*/
+        mResult11 = yiJi.getResult();
+        YiAdapter yiAdapter = new YiAdapter(getActivity(),mResult11);
+        yiAdapter.setClick(new YiAdapter.HttpClick() {
+            @Override
+            public void click(View view, int position) {
+
+                Toast.makeText(getActivity(),"000",Toast.LENGTH_SHORT).show();
+                YiJi.ResultBean bean = mResult11.get(position);
+                String id = bean.getId();
+                mErPresenter.erji(UrlUtil.ONEER,id);
+            }
+        });
+        yijirecycle.setAdapter(yiAdapter);
+        //LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+        //yijirecycle.setLayoutManager(linearLayoutManager);
+        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL);
+        yijirecycle.setLayoutManager(gridLayoutManager);
+    }
+
+    @Override
+    public void onerSuccess(String result) {
+        Gson gson = new Gson();
+        ErJi erJi = gson.fromJson(result, ErJi.class);
+        mJiResult = erJi.getResult();
+        ErAdapter erAdapter = new ErAdapter(getActivity(),mJiResult);
+        erAdapter.setClick(new ErAdapter.HttpClick() {
+            @Override
+            public void click(View view, int position) {
+                Toast.makeText(getActivity(),"111",Toast.LENGTH_SHORT).show();
+                recycleone1.setVisibility(View.GONE);
+                twofragmentrecycle1.setVisibility(View.GONE);
+                recycleone2.setVisibility(View.GONE);
+                threefragmentrecycle1.setVisibility(View.VISIBLE);
+                String id = mJiResult.get(position).getId();
+                mErXiangPresenter.erjixiang(UrlUtil.ONEERXIANG,id,1,99);
+            }
+        });
+        erjirecycle.setAdapter(erAdapter);
+        //LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+        //yijirecycle.setLayoutManager(linearLayoutManager);
+        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL);
+        erjirecycle.setLayoutManager(gridLayoutManager);
+    }
+
+    @Override
+    public void onerXiangSuccess(String result) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        threefragmentrecycle1.setLayoutManager(gridLayoutManager);
+        Gson gson = new Gson();
+        ErXiangUser erXiangUser = gson.fromJson(result, ErXiangUser.class);
+        mResult1 = erXiangUser.getResult();
+        ErXiangAdapter erXiangAdapter = new ErXiangAdapter(getActivity(),mResult1);
+        threefragmentrecycle1.setAdapter(erXiangAdapter);
     }
 
     @OnClick({R.id.lefticon, R.id.righticon})
@@ -282,7 +346,14 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
                 //mYiPresenter.yi(UrlUtil.YIJI);
                 View popView = View.inflate(getActivity(), R.layout.pop_item, null);
                 pop = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                pop.showAsDropDown(view, 0, 0);
+                WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
+                params.alpha = 0.7f;
+                getActivity().getWindow().setAttributes(params);
+                pop.setBackgroundDrawable(new BitmapDrawable());
+                pop.setOutsideTouchable(true);
+                pop.setTouchable(true);
+                pop.setFocusable(false);
+                /*pop.showAsDropDown(view, 0, 0);
                 popView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -291,7 +362,11 @@ public class OneFragment extends Fragment implements OneFragmentOneView {
                         }
                         return false;
                     }
-                });
+                });*/
+                yijirecycle = popView.findViewById(R.id.yijirecycle);
+                erjirecycle = popView.findViewById(R.id.erjirecycle);
+                mYiPresenter.yiji(UrlUtil.ONEYI);
+                pop.showAsDropDown(view, 0, 0);
                 break;
             case R.id.righticon:
                 break;

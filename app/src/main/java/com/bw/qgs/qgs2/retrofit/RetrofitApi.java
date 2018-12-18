@@ -59,4 +59,23 @@ public interface RetrofitApi {
     @POST
     @FormUrlEncoded
     Call<String> postMoMethod(@Url String url, @Field("id") int id);
+
+    @POST
+    @FormUrlEncoded
+    Call<String> postDingMethod(@Url String url, @Field("orderInfo") String orderInfo,@Field("totalPrice") double totalPrice,@Field("addressId") int addressId);
+
+    @GET
+    Call<String> getQueryDing(@Url String url);
+
+    @GET
+    Call<String> getQueryFu(@Url String url);
+
+    @GET
+    Call<String> getYiFu(@Url String url);
+
+    @GET
+    Call<String> getYiFu6(@Url String url,@Query("firstCategoryId") String id);
+
+    @GET
+    Call<String> getYiFu7(@Url String url,@Query("categoryId") String id,@Query("page") int page,@Query("count") int count);
 }

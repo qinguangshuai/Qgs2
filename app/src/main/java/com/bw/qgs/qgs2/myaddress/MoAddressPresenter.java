@@ -2,7 +2,7 @@ package com.bw.qgs.qgs2.myaddress;
 
 import com.bw.qgs.qgs2.myaddress.view.AddressView;
 import com.bw.qgs.qgs2.retrofit.CallBack;
-import com.bw.qgs.qgs2.retrofit.HttpManager;
+import com.bw.qgs.qgs2.model.HttpManager2;
 
 /**
  * date:2018/12/15    8:46
@@ -12,11 +12,11 @@ import com.bw.qgs.qgs2.retrofit.HttpManager;
 public class MoAddressPresenter {
 
     private AddressView mAddressView;
-    private HttpManager mHttpManager;
+    private HttpManager2 mHttpManager;
 
     public MoAddressPresenter(AddressView addressView) {
         mAddressView = addressView;
-        mHttpManager = new HttpManager();
+        mHttpManager = new HttpManager2();
     }
 
     public void mo(String url,int id){

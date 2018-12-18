@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="10dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/quansimple"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/quandingtext1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"/>
+        <TextView
+            android:id="@+id/quandingtext2"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/quantext1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f00"/>
+        <com.bw.qgs.qgs2.custom.AddSub
+            android:id="@+id/quanadd"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</LinearLayout>

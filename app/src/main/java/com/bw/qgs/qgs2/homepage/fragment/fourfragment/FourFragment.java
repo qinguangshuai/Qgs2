@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
 import com.bw.qgs.qgs2.R;
-import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.DingFragment;
-import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.FinishFragment;
-import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.FuFragment;
-import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.PingFragment;
-import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.ShouFragment;
+import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.ding.DingFragment;
+import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.finish.FinishFragment;
+import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.fu.FuFragment;
+import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.ping.PingFragment;
+import com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.shou.ShouFragment;
 
 import java.util.ArrayList;
 
@@ -81,7 +81,7 @@ public class FourFragment extends Fragment {
                 }
             }
         });
-        fourpager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+        fourpager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
                 return list.get(i);

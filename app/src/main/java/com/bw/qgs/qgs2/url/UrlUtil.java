@@ -58,4 +58,16 @@ public interface UrlUtil {
     public String HEAD = "small/user/verify/v1/modifyHeadPic";
     //默认收货地址http://172.17.8.100/small/user/verify/v1/setDefaultReceiveAddress
     public String MORENADDRESS = "small/user/verify/v1/setDefaultReceiveAddress";
+    //创建订单http://172.17.8.100/small/order/verify/v1/createOrder
+    public String DING = "small/order/verify/v1/createOrder";
+    //查询订单http://172.17.8.100/small/order/verify/v1/findOrderListByStatus?status=0&page=1&count=5
+    public String QUERYDING = "small/order/verify/v1/findOrderListByStatus?status=0&page=1&count=99";
+    //代付款http://172.17.8.100/small/order/verify/v1/findOrderListByStatus?status=0&page=4&count=99
+    public String QUERYFU = "small/order/verify/v1/findOrderListByStatus?status=1&page=1&count=99";
+    //一级商品类目http://172.17.8.100/small/commodity/v1/findFirstCategory
+    public String ONEYI = "small/commodity/v1/findFirstCategory";
+    //二级商品类目http://172.17.8.100/small/commodity/v1/findSecondCategory
+    public String ONEER = "small/commodity/v1/findSecondCategory";
+    //二级商品类目详情http://172.17.8.100/small/commodity/v1/findCommodityByCategory
+    public String ONEERXIANG = "small/commodity/v1/findCommodityByCategory";
 }

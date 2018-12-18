@@ -1,4 +1,4 @@
-package com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment;
+package com.bw.qgs.qgs2.homepage.fragment.fourfragment.fragment.shou;
 
 
 import android.os.Bundle;
@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 
 import com.bw.qgs.qgs2.R;
 
-public class FinishFragment extends Fragment {
+public class ShouFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_finish, container, false);
+        return inflater.inflate(R.layout.fragment_shou, container, false);
     }
 
 }

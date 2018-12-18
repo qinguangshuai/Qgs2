@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bw.qgs.qgs2.R;
 import com.bw.qgs.qgs2.custom.AddSub;
 import com.bw.qgs.qgs2.homepage.fragment.threefragment.user.ThreeFragmentUser;
+import com.daimajia.swipe.SwipeLayout;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -66,6 +68,39 @@ public class ThreeFragmentAdapter extends RecyclerView.Adapter<ThreeFragmentAdap
                 }
             }
         });
+        myViewHolder.swipe.setShowMode(SwipeLayout.ShowMode.LayDown);
+        myViewHolder.swipe.addDrag(SwipeLayout.DragEdge.Left, myViewHolder.bottom_wrapper);
+        myViewHolder.swipe.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
     }
 
     @Override
@@ -79,10 +114,14 @@ public class ThreeFragmentAdapter extends RecyclerView.Adapter<ThreeFragmentAdap
         TextView threett1, threett2;
         AddSub addsub;
         CheckBox allcheckbox;
+        SwipeLayout swipe;
+        LinearLayout bottom_wrapper;
 
         public MyViewHolder(@NonNull View itemView, final checkDan checkDan) {
             super(itemView);
             threesimple = itemView.findViewById(R.id.threesimple);
+            swipe = itemView.findViewById(R.id.swipe);
+            bottom_wrapper = itemView.findViewById(R.id.bottom_wrapper);
             threett1 = itemView.findViewById(R.id.threett1);
             threett2 = itemView.findViewById(R.id.threett2);
             addsub = itemView.findViewById(R.id.addsub);

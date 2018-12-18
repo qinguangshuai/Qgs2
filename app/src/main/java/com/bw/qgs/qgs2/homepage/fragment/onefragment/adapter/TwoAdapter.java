@@ -74,6 +74,7 @@ public class TwoAdapter extends RecyclerView.Adapter<TwoAdapter.MyViewHolder> {
             });
         }
     }
+
     public interface HttpOnClick{
         void click(View view,int position);
     }

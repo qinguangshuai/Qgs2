@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    android:layout_height="300dp">
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:background="#1a1919"
         android:alpha="0.7"
@@ -94,11 +94,23 @@
             android:padding="5dp"
             android:layout_gravity="center"
             android:background="@drawable/category_icon_sweater_n_hdpi"/>
-    </LinearLayout>
+    </LinearLayout>-->
     <!--<android.support.v7.widget.RecyclerView
         android:id="@+id/pop1recycle"
         android:layout_width="match_parent"
         android:alpha="0.7"
         android:layout_height="50dp"/>-->
+    <android.support.v7.widget.RecyclerView
+        android:background="#1a1919"
+        android:id="@+id/yijirecycle"
+        android:alpha="0.7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/erjirecycle"
+        android:background="#646161"
+        android:alpha="0.7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

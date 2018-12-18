@@ -1,7 +1,7 @@
 package com.bw.qgs.qgs2.xinzeng.presenter;
 
 import com.bw.qgs.qgs2.retrofit.CallBack;
-import com.bw.qgs.qgs2.retrofit.HttpManager;
+import com.bw.qgs.qgs2.model.HttpManager;
 import com.bw.qgs.qgs2.xinzeng.view.UpdateAddressView;
 
 /**

@@ -30,7 +30,6 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
             }
             page.setScaleY(scaleFactor);
         } else {
-
             page.setScaleX(MIN_SCALE);
             page.setScaleY(MIN_SCALE);
         }

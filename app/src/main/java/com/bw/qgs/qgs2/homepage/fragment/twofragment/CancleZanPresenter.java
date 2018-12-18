@@ -2,7 +2,7 @@ package com.bw.qgs.qgs2.homepage.fragment.twofragment;
 
 import com.bw.qgs.qgs2.homepage.fragment.twofragment.view.TwoFragmentView;
 import com.bw.qgs.qgs2.retrofit.CallBack;
-import com.bw.qgs.qgs2.retrofit.HttpManager;
+import com.bw.qgs.qgs2.model.HttpManager;
 
 /**
  * date:2018/12/13    11:18

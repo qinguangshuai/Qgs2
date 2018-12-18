@@ -1,8 +1,10 @@
-package com.bw.qgs.qgs2.retrofit;
+package com.bw.qgs.qgs2.model;
 
 import android.util.Log;
 
 import com.bw.qgs.qgs2.okhttp.OkHttpUtil;
+import com.bw.qgs.qgs2.retrofit.CallBack;
+import com.bw.qgs.qgs2.retrofit.RetrofitApi;
 
 import java.io.File;
 
@@ -157,23 +159,6 @@ public class HttpManager {
     public void postHeadMethod(String url, File image, final CallBack callBack){
         RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
         Call<String> call = retrofitApi.postHeadMethod(url,image);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                String s = response.body();
-                callBack.onRetrofitSuccess(s);
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                callBack.onRetrofitFailer("失败");
-            }
-        });
-    }
-
-    public void postMoMethod(String url, int id, final CallBack callBack){
-        RetrofitApi retrofitApi = OkHttpUtil.retrofit.create(RetrofitApi.class);
-        Call<String> call = retrofitApi.postMoMethod(url,id);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

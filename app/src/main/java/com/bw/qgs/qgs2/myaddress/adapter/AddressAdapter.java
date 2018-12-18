@@ -58,7 +58,14 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
+
         final AddressUser.ResultBean bean = mResult1.get(i);
+        if (bean.getWhetherDefault()==1){
+            myViewHolder.addressbox.setChecked(true);
+
+        }else{
+            myViewHolder.addressbox.setChecked(false);
+        }
         myViewHolder.addresstext1.setText(bean.getRealName());
         myViewHolder.addresstext2.setText(bean.getPhone());
         myViewHolder.addressbtext3.setText(bean.getAddress());
